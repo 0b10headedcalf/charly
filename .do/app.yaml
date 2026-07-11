@@ -1,0 +1,49 @@
+# DigitalOcean App Platform spec for Charly.
+# Deploy: console → App Platform → Create App → import this repo (spec is
+# auto-detected), or: doctl apps create --spec .do/app.yaml
+# Then fill in the SECRET env values in the console and hit deploy.
+name: charly
+region: sfo
+services:
+  - name: web
+    github:
+      repo: 0b10headedcalf/charly
+      branch: main
+      deploy_on_push: true
+    build_command: npm run build
+    run_command: npm start
+    environment_slug: node-js
+    instance_count: 1
+    instance_size_slug: basic-xxs
+    http_port: 8080
+    envs:
+      # Tier 1 — required for live AI
+      - key: DIGITAL_OCEAN_MODEL_ACCESS_KEY
+        scope: RUN_TIME
+        type: SECRET
+      # Sessions (any long random string)
+      - key: AUTH_SECRET
+        scope: RUN_TIME
+        type: SECRET
+      # Tier 3 — Google OAuth (optional; guest mode works without)
+      - key: GOOGLE_CLIENT_ID
+        scope: RUN_TIME
+      - key: GOOGLE_CLIENT_SECRET
+        scope: RUN_TIME
+        type: SECRET
+      # Tier 2 — dedicated agents (optional; falls back to inference)
+      - key: CHARLY_ENDPOINT
+        scope: RUN_TIME
+      - key: CHARLY_KEY
+        scope: RUN_TIME
+        type: SECRET
+      - key: PLANNER_ENDPOINT
+        scope: RUN_TIME
+      - key: PLANNER_KEY
+        scope: RUN_TIME
+        type: SECRET
+      - key: SCOUT_ENDPOINT
+        scope: RUN_TIME
+      - key: SCOUT_KEY
+        scope: RUN_TIME
+        type: SECRET

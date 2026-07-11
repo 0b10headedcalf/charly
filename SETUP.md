@@ -59,6 +59,26 @@ Restart the dev server after. The copilot and plan footers will switch from
 3. The "Continue with Google" button appears on `/signin` automatically.
    Guest sign-in (name only) always works, so the demo never blocks on this.
 
+## Deploy — DigitalOcean App Platform (~10 min)
+
+Repo: `github.com/0b10headedcalf/charly`. The app spec lives at `.do/app.yaml`.
+
+1. Push main to GitHub (App Platform deploys from it, auto-redeploys on push).
+2. [cloud.digitalocean.com](https://cloud.digitalocean.com) → **App Platform** → Create App →
+   pick the `charly` repo → it detects `.do/app.yaml` → fill in the SECRET env
+   values (at minimum `DIGITAL_OCEAN_MODEL_ACCESS_KEY` + `AUTH_SECRET`) → Create.
+   CLI alternative: `doctl apps create --spec .do/app.yaml`.
+3. After the first deploy you get `https://charly-xxxxx.ondigitalocean.app`.
+   If using Google OAuth, add `https://<that-domain>/api/auth/callback` as an
+   authorized redirect URI in the Google console (localhost one can stay).
+4. Verify: open `/`, run the survey, generate a plan, check `/dashboard`.
+
+Notes:
+- The container filesystem is **ephemeral**: `data/state.json` reseeds on every
+  deploy/restart. That's fine (even handy) for a demo; a real launch would move
+  state to DO Managed Postgres.
+- `npm start` (`next start`) honors App Platform's `PORT` automatically.
+
 ## Judging story cheat-sheet
 
 - **Three Agent Platform agents** (own endpoints): persona / logistics / RAG org scout.
