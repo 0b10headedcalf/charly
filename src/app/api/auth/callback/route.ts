@@ -1,16 +1,18 @@
 import { NextResponse } from "next/server";
-import { sessionCookie } from "@/lib/auth";
+import { requestOrigin, sessionCookie } from "@/lib/auth";
 
 export async function GET(req: Request) {
+  const origin = requestOrigin(req);
   const code = new URL(req.url).searchParams.get("code");
   const clientId = process.env.GOOGLE_CLIENT_ID;
   const clientSecret = process.env.GOOGLE_CLIENT_SECRET;
   if (!code || !clientId || !clientSecret) {
-    return NextResponse.redirect(new URL("/signin?error=oauth-failed", req.url));
+    return NextResponse.redirect(`${origin}/signin?error=oauth-failed`);
   }
 
   try {
-    const redirectUri = new URL("/api/auth/callback", req.url).toString();
+    // must byte-match the redirect_uri sent in the authorize step
+    const redirectUri = `${origin}/api/auth/callback`;
     const tokenRes = await fetch("https://oauth2.googleapis.com/token", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -36,7 +38,7 @@ export async function GET(req: Request) {
       email?: string;
     };
 
-    const res = NextResponse.redirect(new URL("/join", req.url));
+    const res = NextResponse.redirect(`${origin}/join`);
     res.cookies.set(
       sessionCookie({
         id: `google-${user.sub}`,
@@ -48,6 +50,6 @@ export async function GET(req: Request) {
     return res;
   } catch (err) {
     console.error("google oauth failed:", err);
-    return NextResponse.redirect(new URL("/signin?error=oauth-failed", req.url));
+    return NextResponse.redirect(`${origin}/signin?error=oauth-failed`);
   }
 }

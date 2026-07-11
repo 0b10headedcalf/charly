@@ -56,3 +56,18 @@ export const SESSION_COOKIE_NAME = COOKIE;
 export function googleConfigured(): boolean {
   return Boolean(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET);
 }
+
+// Public origin of the running app. Behind App Platform's proxy req.url is
+// http://, so trust x-forwarded-* first — otherwise the OAuth redirect_uri
+// is built as http:// and Google rejects it as a mismatch.
+export function requestOrigin(req: Request): string {
+  const url = new URL(req.url);
+  const proto =
+    req.headers.get("x-forwarded-proto")?.split(",")[0].trim() ||
+    url.protocol.replace(":", "");
+  const host =
+    req.headers.get("x-forwarded-host")?.split(",")[0].trim() ||
+    req.headers.get("host") ||
+    url.host;
+  return `${proto}://${host}`;
+}

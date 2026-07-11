@@ -1,11 +1,13 @@
 import { NextResponse } from "next/server";
+import { requestOrigin } from "@/lib/auth";
 
 export async function GET(req: Request) {
+  const origin = requestOrigin(req);
   const clientId = process.env.GOOGLE_CLIENT_ID;
   if (!clientId) {
-    return NextResponse.redirect(new URL("/signin?error=google-not-configured", req.url));
+    return NextResponse.redirect(`${origin}/signin?error=google-not-configured`);
   }
-  const redirectUri = new URL("/api/auth/callback", req.url).toString();
+  const redirectUri = `${origin}/api/auth/callback`;
   const url = new URL("https://accounts.google.com/o/oauth2/v2/auth");
   url.searchParams.set("client_id", clientId);
   url.searchParams.set("redirect_uri", redirectUri);
