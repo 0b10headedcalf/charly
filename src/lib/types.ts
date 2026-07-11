@@ -51,10 +51,26 @@ export type OrgEvent = {
   createdAt: string;
 };
 
+// Participant-facing version of an ActionPlan, rewritten by Gradient AI
+// into a printable handout. planGeneratedAt keys the cache: regenerating
+// the plan invalidates the handout.
+export type Handout = {
+  groupId: string;
+  headline: string;
+  intro: string;
+  weeks: { title: string; items: { action: string; org: string; when: string }[] }[];
+  bring: string[];
+  roles: string[];
+  source: "inference" | "mock";
+  generatedAt: string;
+  planGeneratedAt: string;
+};
+
 export type AppState = {
   members: Member[];
   plans: Record<string, ActionPlan>;
   events: OrgEvent[];
+  handouts: Record<string, Handout>;
 };
 
 export type ChatMessage = {

@@ -54,6 +54,17 @@ export function PlanSection({
         >
           {busy ? "Coordinating…" : plan ? "Regenerate plan" : "Generate this crew's plan"}
         </button>
+        {plan && (
+          <a
+            href={`/groups/${groupId}/handout`}
+            target="_blank"
+            rel="noopener"
+            className="rounded-full border-2 px-5 py-2 text-sm font-bold transition hover:bg-kraft"
+            style={{ borderColor: groupColor, color: groupColor }}
+          >
+            Export PDF handout
+          </a>
+        )}
       </div>
 
       {error && (

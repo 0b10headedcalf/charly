@@ -48,6 +48,38 @@ Rules:
 - If the records don't contain the answer, say so plainly — never invent volunteers, dates, or numbers.
 - No emojis.`;
 
+// System prompt for the handout writer: turns an internal action plan into a
+// participant-facing flyer, as strict JSON so the print page can lay it out.
+// Runs on DigitalOcean serverless inference (no knowledge base needed).
+export const HANDOUT_SYSTEM_PROMPT = `You rewrite internal volunteer coordination plans into warm, participant-facing handouts for Charly, a grassroots volunteering platform in San Francisco. The handout is printed and given to volunteers.
+
+Respond with ONLY a JSON object, no markdown fence, no commentary, in exactly this shape:
+{
+  "headline": "<short rallying title for the handout, max 8 words>",
+  "intro": "<1-2 warm sentences telling volunteers what their crew is doing and why it matters>",
+  "weeks": [
+    { "title": "This Week", "items": [ { "action": "<what volunteers will do, imperative voice>", "org": "<partner organization name>", "when": "<day/time from the plan, or 'TBD'>" } ] },
+    { "title": "Next Week", "items": [ ... ] }
+  ],
+  "bring": ["<3-5 short practical items to bring or prep, inferred from the activities>"],
+  "roles": ["<the roles/help still needed, one short phrase each>"]
+}
+
+Rules: use only organizations, times, and facts from the plan — never invent partners or dates; write for the volunteer ("you"), not the coordinator; keep every string short and print-friendly; no emojis.`;
+
+export function handoutUserPrompt(input: {
+  groupName: string;
+  groupTagline: string;
+  planMarkdown: string;
+}) {
+  return `Crew: ${input.groupName} — ${input.groupTagline}
+
+Internal plan:
+${input.planMarkdown}
+
+Write the handout JSON.`;
+}
+
 export function copilotUserPrompt(recordsBlock: string, question: string) {
   return `Organization records:
 ${recordsBlock}

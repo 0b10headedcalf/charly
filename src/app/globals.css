@@ -101,6 +101,15 @@ h1, h2, h3, .font-display {
   animation: bounce-soft 3.2s ease-in-out infinite;
 }
 
+/* Print: the /groups/[id]/handout page doubles as the PDF export.
+   Hide chrome, drop the grain, keep group accent colors. */
+@media print {
+  header, footer, .no-print { display: none !important; }
+  body { background: white; }
+  .handout { box-shadow: none; border-radius: 0; padding: 0; }
+  * { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+}
+
 /* Markdown plan rendering */
 .plan-md h2 {
   font-size: 1.15rem;

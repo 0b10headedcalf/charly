@@ -1,6 +1,6 @@
 import { promises as fs } from "fs";
 import path from "path";
-import type { ActionPlan, AppState, Member, OrgEvent } from "./types";
+import type { ActionPlan, AppState, Handout, Member, OrgEvent } from "./types";
 import seedMembers from "../../data/seed-members.json";
 import seedEvents from "../../data/seed-events.json";
 
@@ -16,13 +16,15 @@ export async function readState(): Promise<AppState> {
       members: seedMembers as Member[],
       plans: {},
       events: seedEvents as OrgEvent[],
+      handouts: {},
     };
     await writeState(state);
     return state;
   }
-  // migrate states written before events existed
-  if (!state.events) {
-    state.events = seedEvents as OrgEvent[];
+  // migrate states written before events/handouts existed
+  if (!state.events || !state.handouts) {
+    state.events = state.events ?? (seedEvents as OrgEvent[]);
+    state.handouts = state.handouts ?? {};
     await writeState(state);
   }
   return state;
@@ -41,6 +43,12 @@ export async function addMember(member: Member): Promise<void> {
 export async function savePlan(plan: ActionPlan): Promise<void> {
   const state = await readState();
   state.plans[plan.groupId] = plan;
+  await writeState(state);
+}
+
+export async function saveHandout(handout: Handout): Promise<void> {
+  const state = await readState();
+  state.handouts[handout.groupId] = handout;
   await writeState(state);
 }
 
