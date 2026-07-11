@@ -41,7 +41,7 @@ export async function POST(req: Request) {
           {
             role: "user",
             content: `A new volunteer answered an onboarding survey: ${answersToText(answers)}
-Write ONE short, warm, personal follow-up question (max 20 words) that digs one level deeper into what they'd love doing, plus 3 short answer options (max 8 words each).
+Write ONE short, warm, personal follow-up question (max 20 words, no emojis) that digs one level deeper into what they'd love doing, plus 3 short answer options (max 8 words each, no emojis).
 Reply with ONLY this JSON: {"question": "...", "options": ["...", "...", "..."]}`,
           },
         ],
@@ -81,7 +81,7 @@ Reply with ONLY this JSON: {"question": "...", "options": ["...", "...", "..."]}
             {
               role: "user",
               content: `A volunteer named ${name} answered: ${text}
-Reply with ONLY this JSON: {"interests": ["3-5 short lowercase interest tags"], "summary": "one warm second-person sentence about how they want to help"}`,
+Reply with ONLY this JSON (no emojis anywhere): {"interests": ["3-5 short lowercase interest tags"], "summary": "one warm second-person sentence about how they want to help"}`,
             },
           ],
           max_completion_tokens: 150,

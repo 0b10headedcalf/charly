@@ -11,7 +11,7 @@ const MATCH_RE = /MATCH_READY:\s*(\{[\s\S]*\})/;
 function mockReply(messages: ChatMessage[]): string {
   const userTurns = messages.filter((m) => m.role === "user");
   if (userTurns.length <= 1) {
-    return "Ooh, I love that! 🧡 How do you like to help — hands-on stuff, driving things around, teaching, cooking...?";
+    return "Ooh, I love that! How do you like to help — hands-on stuff, driving things around, teaching, cooking...?";
   }
   if (userTurns.length === 2) {
     return "Amazing. Last one: how much time do you have — a couple hours a month, or every week?";
@@ -20,7 +20,7 @@ function mockReply(messages: ChatMessage[]): string {
   // pull out words that match any group's keyword vocabulary
   const vocab = new Set(allGroups.flatMap((g) => g.keywords));
   const interests = [...new Set(allText.split(/[^a-z]+/).filter((w) => vocab.has(w)))].slice(0, 4);
-  return `Okay okay okay — I found your people!! 🎉
+  return `Okay okay okay — I found your people!
 MATCH_READY: {"interests": ${JSON.stringify(interests.length ? interests : ["helping neighbors"])}, "summary": "A neighbor ready to pitch in."}`;
 }
 
@@ -90,7 +90,7 @@ export async function POST(req: Request) {
   await addMember(member);
 
   return NextResponse.json({
-    reply: visible || "I found your people!! 🎉",
+    reply: visible || "I found your people!",
     mode,
     matched: { group, member, interests, summary },
   });
