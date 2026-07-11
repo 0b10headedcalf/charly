@@ -1,14 +1,15 @@
 import orgsData from "../../../data/orgs.json";
+import { CityHeatmap } from "@/components/CityHeatmap";
 import { DashboardCharts } from "@/components/DashboardCharts";
 import { allGroups } from "@/lib/matching";
-import { getCityPulse } from "@/lib/sfdata";
+import { getCityPulse, getHeatmap } from "@/lib/sfdata";
 import { readState } from "@/lib/store";
 import type { Org } from "@/lib/types";
 
 export const dynamic = "force-dynamic";
 
 export default async function DashboardPage() {
-  const [state, pulse] = await Promise.all([readState(), getCityPulse()]);
+  const [state, pulse, heat] = await Promise.all([readState(), getCityPulse(), getHeatmap()]);
   const orgs = orgsData as Org[];
 
   const crewData = allGroups.map((g) => ({
@@ -59,6 +60,7 @@ export default async function DashboardPage() {
         ))}
       </div>
 
+      <CityHeatmap heat={heat} />
       <DashboardCharts crewData={crewData} interests={interests} pulse={pulse} />
     </div>
   );

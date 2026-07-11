@@ -3,6 +3,7 @@
 //  1. the Community board renders the "city pulse" so crews see real need
 //  2. the planner agent gets the numbers inline so action plans cite them
 import snapshot from "../../data/sf311-snapshot.json";
+import heatSnapshot from "../../data/sf311-heat-snapshot.json";
 
 const SODA = "https://data.sfgov.org/resource/vw6y-z8j6.json";
 
@@ -92,6 +93,69 @@ export async function getCityPulse(): Promise<CityPulse> {
     const pulse = { ...(snapshot as CityPulse), source: "snapshot" as const };
     cache = { pulse, at: Date.now() };
     return pulse;
+  }
+}
+
+// ---- Heatmap: 311 reports binned into a ~500m grid, server-side via SoQL ----
+// Cell coords are round(lat*200) / round(long*200): divide by 200 to get the
+// cell-center degrees. SODA does the aggregation, so payloads stay tiny.
+
+export type HeatCell = { la: number; lo: number; n: number };
+export type HeatLayer = { groupId: string; label: string; cells: HeatCell[] };
+export type Heatmap = { fetchedAt: string; source: "live" | "snapshot"; layers: HeatLayer[] };
+
+const HEAT_LAYERS: { groupId: string; label: string; services: string[] }[] = [
+  {
+    groupId: "housing",
+    label: "Encampments & blocked sidewalks",
+    services: ["Encampment", "Blocked Street and Sidewalk", "Homeless Concerns"],
+  },
+  {
+    groupId: "environment",
+    label: "Cleaning, graffiti & trees",
+    services: [
+      "Street and Sidewalk Cleaning",
+      "Graffiti Public",
+      "Graffiti Private",
+      "Tree Maintenance",
+      "Litter Receptacle Maintenance",
+    ],
+  },
+];
+
+let heatCache: { heat: Heatmap; at: number } | null = null;
+
+export async function getHeatmap(): Promise<Heatmap> {
+  if (heatCache && Date.now() - heatCache.at < CACHE_MS) return heatCache.heat;
+  const since = new Date(Date.now() - 30 * 24 * 3600 * 1000).toISOString().slice(0, 19);
+  try {
+    const layers = await Promise.all(
+      HEAT_LAYERS.map(async (layer) => {
+        const services = layer.services.map((s) => `'${s}'`).join(",");
+        const rows = await soda(
+          `$select=round(lat*200,0) as la,round(long*200,0) as lo,count(*) as n` +
+            `&$group=la,lo&$order=n DESC&$limit=2500` +
+            `&$where=requested_datetime>'${since}' AND lat>37.6 AND lat<37.85 AND long>-122.55 AND long<-122.3 AND service_name in(${services})`
+        );
+        return {
+          groupId: layer.groupId,
+          label: layer.label,
+          cells: rows.map((r) => ({
+            la: Math.round(Number(r.la)),
+            lo: Math.round(Number(r.lo)),
+            n: Number(r.n),
+          })),
+        };
+      })
+    );
+    const heat: Heatmap = { fetchedAt: new Date().toISOString(), source: "live", layers };
+    heatCache = { heat, at: Date.now() };
+    return heat;
+  } catch (err) {
+    console.warn("DataSF heatmap fetch failed, using snapshot:", err);
+    const heat = { ...(heatSnapshot as Omit<Heatmap, "source">), source: "snapshot" as const };
+    heatCache = { heat, at: Date.now() };
+    return heat;
   }
 }
 
