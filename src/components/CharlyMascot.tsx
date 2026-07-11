@@ -1,28 +1,57 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-// Charly the mascot. Drop your Aseprite export at public/charly.gif and it
-// renders automatically (pixel-crisp, no smoothing). Until that file exists,
-// the placeholder SVG below is shown instead.
+// Charly the mascot: Aseprite pixel art from public/, rendered pixel-crisp.
+// Tries the animated gif first, then the static png, and only falls back to
+// the placeholder SVG if neither exists. The probe runs in an effect (not img
+// onError) because a 404 on a server-rendered <img> fires before hydration
+// attaches React's handlers.
+const ART_SOURCES = ["/charly.gif", "/charly.png"];
+
+let resolvedArt: string | null | undefined; // module-level: probe once per page load
+
+async function probeArt(): Promise<string | null> {
+  if (resolvedArt !== undefined) return resolvedArt;
+  for (const src of ART_SOURCES) {
+    const ok = await new Promise<boolean>((resolve) => {
+      const img = new Image();
+      img.onload = () => resolve(true);
+      img.onerror = () => resolve(false);
+      img.src = src;
+    });
+    if (ok) {
+      resolvedArt = src;
+      return src;
+    }
+  }
+  resolvedArt = null;
+  return null;
+}
+
 export function CharlyMascot({ size = 96 }: { size?: number }) {
-  // SVG shows immediately; swaps to the gif only once it actually loads,
-  // so there's no broken-image flash while the gif doesn't exist yet.
-  const [gifReady, setGifReady] = useState(false);
+  const [src, setSrc] = useState<string | null>(null);
 
+  useEffect(() => {
+    let cancelled = false;
+    probeArt().then((found) => {
+      if (!cancelled) setSrc(found);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  if (!src) return <PlaceholderCharly size={size} />;
   return (
-    <>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src="/charly.gif"
-        alt="Charly the mascot"
-        width={size}
-        height={size}
-        style={{ imageRendering: "pixelated", display: gifReady ? "block" : "none" }}
-        onLoad={() => setGifReady(true)}
-      />
-      {!gifReady && <PlaceholderCharly size={size} />}
-    </>
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src={src}
+      alt="Charly the mascot"
+      width={size}
+      height={size}
+      style={{ imageRendering: "pixelated" }}
+    />
   );
 }
 
