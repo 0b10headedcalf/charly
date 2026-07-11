@@ -26,13 +26,13 @@ export default async function Home() {
           Fix your corner of the world.
         </h1>
         <p className="max-w-xl text-lg text-clay">
-          Tell Charli what you care about. Get matched with a neighborhood crew,
-          and let our AI agents coordinate the plan with local aid orgs — so you
-          can just show up and help.
+          Take Charli&apos;s two-minute welcome survey. Get matched with a
+          neighborhood crew, and let our AI agents coordinate the plan with local
+          aid orgs — so you can just show up and help.
         </p>
         <div className="flex flex-wrap items-center justify-center gap-3">
           <Link
-            href="/chat"
+            href="/join"
             className="rounded-full bg-coral px-7 py-3 text-lg font-bold text-white shadow-md transition hover:bg-coral-deep hover:shadow-lg"
           >
             Meet Charli 🧡
@@ -50,9 +50,9 @@ export default async function Home() {
       <section className="grid gap-4 py-8 sm:grid-cols-3">
         {[
           {
-            step: "Chat",
-            text: "Charli asks what moves you — two minutes, zero forms.",
-            emoji: "💬",
+            step: "Survey",
+            text: "Charli's welcome survey — a few taps, plus one question an AI writes just for you.",
+            emoji: "📝",
           },
           {
             step: "Match",

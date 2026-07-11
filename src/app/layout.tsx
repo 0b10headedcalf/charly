@@ -46,11 +46,14 @@ export default function RootLayout({
               <Link href="/dashboard" className="rounded-full px-3 py-1.5 hover:bg-kraft">
                 Community board
               </Link>
+              <Link href="/profile" className="rounded-full px-3 py-1.5 hover:bg-kraft">
+                Profile
+              </Link>
               <Link
-                href="/chat"
+                href="/join"
                 className="rounded-full bg-coral px-4 py-1.5 text-white shadow-sm hover:bg-coral-deep"
               >
-                Chat with Charli
+                Join
               </Link>
             </div>
           </nav>

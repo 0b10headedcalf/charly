@@ -38,9 +38,10 @@ export async function POST(req: Request) {
   const events = state.events.filter((e) => e.orgId === org.id);
   const records = recordsBlock(org, events);
 
-  // Reuse the planner agent slot: it carries the orgs knowledge base, which
-  // gives the copilot RAG background on partner orgs beyond the live records.
-  const { mode, client, model } = resolveAgent("planner");
+  // The scout agent's job is org discovery & info: with a console agent
+  // configured, its knowledge base adds RAG background on every partner org
+  // beyond the live records passed inline below.
+  const { mode, client, model } = resolveAgent("scout");
   let answer: string;
   try {
     if (mode === "mock" || !client) {

@@ -25,6 +25,9 @@ export type Member = {
   groupId: string;
   interests: string[];
   joinedAt: string;
+  userId?: string; // session id (github-* or guest-*)
+  avatarUrl?: string;
+  summary?: string;
 };
 
 export type ActionPlan = {

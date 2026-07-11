@@ -21,18 +21,28 @@ export function inferenceClient(): OpenAI | null {
   return new OpenAI({ baseURL: INFERENCE_BASE_URL, apiKey: key });
 }
 
-// Resolution order for each agent role:
+// Each role maps to its own DO Agent Platform agent (own endpoint + key):
+//   charli  — persona / member-facing conversation
+//   planner — community organizing logistics (action plans)
+//   scout   — org discovery & info, RAG over the orgs knowledge base
+// Resolution order per role:
 // 1. dedicated DO console agent (best: uses Agent Platform + knowledge base)
 // 2. DO serverless inference with the system prompt inlined
 // 3. mock (no keys yet — lets the app run before console setup)
-export function resolveAgent(role: "charli" | "planner"): {
+export type AgentRole = "charli" | "planner" | "scout";
+
+const AGENT_ENV: Record<AgentRole, { endpoint?: string; key?: string }> = {
+  charli: { endpoint: process.env.CHARLI_ENDPOINT, key: process.env.CHARLI_KEY },
+  planner: { endpoint: process.env.PLANNER_ENDPOINT, key: process.env.PLANNER_KEY },
+  scout: { endpoint: process.env.SCOUT_ENDPOINT, key: process.env.SCOUT_KEY },
+};
+
+export function resolveAgent(role: AgentRole): {
   mode: AiMode;
   client: OpenAI | null;
   model: string;
 } {
-  const endpoint =
-    role === "charli" ? process.env.CHARLI_ENDPOINT : process.env.PLANNER_ENDPOINT;
-  const key = role === "charli" ? process.env.CHARLI_KEY : process.env.PLANNER_KEY;
+  const { endpoint, key } = AGENT_ENV[role];
   if (endpoint && key) {
     return { mode: "agent", client: agentClient(endpoint, key), model: "n/a" };
   }
