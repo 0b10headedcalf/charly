@@ -82,6 +82,8 @@ export function CityHeatmap({ heat }: { heat: Heatmap }) {
           role="img"
           aria-label={`Heatmap of ${layer.label} reports across San Francisco`}
         >
+          {/* basemap stitched to the exact bbox above (see scripts/make-sf-map.py) */}
+          <image href="/sf-map.png" x={0} y={0} width={W} height={H} preserveAspectRatio="none" />
           {cells.map((c) => {
             const lat = c.la / 200;
             const lng = c.lo / 200;
@@ -95,6 +97,7 @@ export function CityHeatmap({ heat }: { heat: Heatmap }) {
                 rx={2.5}
                 fill={color}
                 opacity={intensity(c.n)}
+                style={{ mixBlendMode: "multiply" }}
               >
                 <title>{`${c.n.toLocaleString()} reports near ${lat.toFixed(3)}, ${lng.toFixed(3)}`}</title>
               </rect>
@@ -135,7 +138,7 @@ export function CityHeatmap({ heat }: { heat: Heatmap }) {
           />
           more (log scale)
         </span>
-        <span>Hover a block for its count · source: data.sfgov.org</span>
+        <span>Hover a block for its count · source: data.sfgov.org · map © OpenStreetMap, © CARTO</span>
       </div>
     </section>
   );
