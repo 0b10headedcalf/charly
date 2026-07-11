@@ -16,35 +16,3 @@ with real local aid organizations.
 | **Agent Platform agent + Knowledge Base RAG** (org data, retrieval citations) | crew action plans |
 | **Serverless inference** (`llama3.3-70b-instruct`) | interest → crew classification |
 | **Agent + KB (or inference) over live records** | Org HQ ops copilot |
-
-Every AI call degrades gracefully: console agent → serverless inference →
-deterministic demo mode, so the app runs even with zero keys configured.
-
-## Run it
-
-```bash
-npm install
-cp .env.example .env.local   # optional — add DigitalOcean keys (see SETUP.md)
-npm run dev                  # http://localhost:3000
-```
-
-See **SETUP.md** for the 15-minute DigitalOcean console setup (model access
-key, agents, knowledge base).
-
-## Tour
-
-- `/` — the neighborhood board: crews pinned as flyers
-- `/chat` — meet Charly, get matched into a crew
-- `/groups/<id>` — crew page: members, partner orgs, AI action plan, live event callouts with one-tap signup
-- `/orgs/<id>` — Org HQ: partner orgs post recruiting events, track signups, keep record notes, and ask an AI ops copilot questions over their live records
-- `/dashboard` — community board: live matching + capacity charts
-
-## Stack
-
-Next.js 16 (App Router) · Tailwind 4 · Recharts · OpenAI SDK pointed at
-DigitalOcean's OpenAI-compatible endpoints · JSON file store (hackathon-grade
-persistence, no DB required).
-
-> 🎨 Mascot note: drop your Aseprite export at `public/charly.gif` and every
-> mascot instance switches to it automatically (pixel-crisp rendering). Until
-> then the placeholder SVG in `src/components/CharlyMascot.tsx` shows.
