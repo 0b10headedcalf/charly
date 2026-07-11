@@ -53,7 +53,6 @@ export function CityHeatmap({ heat }: { heat: Heatmap }) {
           <h2 className="text-lg font-bold">Need map</h2>
           <p className="text-sm text-clay">
             Every SF311 report from the last 30 days, on a ~500m grid.{" "}
-            {heat.source === "live" ? "Live from DataSF." : "DataSF snapshot."}
           </p>
         </div>
         <div className="flex gap-1.5">

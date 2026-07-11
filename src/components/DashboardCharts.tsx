@@ -77,7 +77,7 @@ export function DashboardCharts({
     <>
       <Card
         title="Neighbors per crew"
-        sub="Where people landed after chatting with Charly."
+        sub=""
       >
         <ResponsiveContainer width="100%" height={260}>
           <BarChart data={byMembers} layout="vertical" margin={{ left: 8, right: 32 }}>
@@ -107,7 +107,7 @@ export function DashboardCharts({
 
       <Card
         title="Volunteer supply vs. partner capacity"
-        sub="Crews vs. how many volunteers their partner orgs can absorb — the gap is the opportunity."
+        sub=""
       >
         <ResponsiveContainer width="100%" height={280}>
           <BarChart data={crewData} margin={{ right: 8 }} barGap={2}>
@@ -142,8 +142,8 @@ export function DashboardCharts({
       </Card>
 
       <Card
-        title="City pulse — where SF needs hands"
-        sub={`${pulse.source === "live" ? "Live from DataSF" : "DataSF snapshot"} (SF311 reports, last 30 days), colored by the crew that can act on them.`}
+        title="City pulse"
+        sub=""
       >
         <ResponsiveContainer width="100%" height={Math.max(160, pulse.categories.length * 36)}>
           <BarChart
@@ -201,7 +201,7 @@ export function DashboardCharts({
         </div>
       </Card>
 
-      <Card title="What people care about" sub="Most common interests Charly heard in onboarding chats.">
+      <Card title="What people care about" sub="">
         <ResponsiveContainer width="100%" height={Math.max(160, interests.length * 34)}>
           <BarChart data={interests} layout="vertical" margin={{ left: 8, right: 32 }}>
             <CartesianGrid horizontal={false} stroke={GRID} />

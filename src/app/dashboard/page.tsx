@@ -45,9 +45,6 @@ export default async function DashboardPage() {
   return (
     <div className="mx-auto max-w-5xl px-4 py-12">
       <h1 className="text-3xl font-extrabold">Community board</h1>
-      <p className="mt-1 text-clay">
-        What the neighborhood is up to, live from Charly&apos;s matching data.
-      </p>
 
       <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
         {tiles.map((t) => (
