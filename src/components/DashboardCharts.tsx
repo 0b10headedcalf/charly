@@ -66,11 +66,11 @@ export function DashboardCharts({
   const byMembers = [...crewData]
     .sort((a, b) => b.members - a.members)
     .map((d) => ({ ...d, fill: d.color }));
+  const shortName = (name: string) =>
+    name.replace(/ (Crew|Squad|Team|Circle|Collective|Allies)$/, "");
   const crewLabel = (id: unknown) => {
     const c = crewData.find((d) => d.id === id);
-    return c
-      ? `${c.emoji} ${c.name.replace(/ (Crew|Squad|Team|Circle|Collective|Allies)$/, "")}`
-      : String(id);
+    return c ? shortName(c.name) : String(id);
   };
 
   return (
@@ -114,8 +114,11 @@ export function DashboardCharts({
             <CartesianGrid vertical={false} stroke={GRID} />
             <XAxis
               dataKey="id"
-              tickFormatter={(id: string) => crewData.find((d) => d.id === id)?.emoji ?? id}
-              tick={{ fontSize: 18 }}
+              tickFormatter={(id: string) => {
+                const c = crewData.find((d) => d.id === id);
+                return c ? shortName(c.name).split(" ")[0] : id;
+              }}
+              tick={{ fill: INK, fontSize: 12 }}
               axisLine={false}
               tickLine={false}
             />

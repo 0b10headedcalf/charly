@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { GroupBadge } from "@/components/GroupBadge";
 import type { Group } from "@/lib/types";
 
 export function GroupFlyer({
@@ -16,7 +17,7 @@ export function GroupFlyer({
       className={`flyer block p-5 ${index % 2 === 0 ? "tilt-l" : "tilt-r"}`}
       style={{ "--pin-color": group.color } as React.CSSProperties}
     >
-      <div className="text-3xl">{group.emoji}</div>
+      <GroupBadge group={group} size={40} />
       <h3 className="mt-2 text-lg font-bold leading-tight">{group.name}</h3>
       <p className="mt-1 text-sm font-semibold" style={{ color: group.color }}>
         {group.tagline}

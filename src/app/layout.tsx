@@ -60,8 +60,8 @@ export default function RootLayout({
         </header>
         <main className="flex-1">{children}</main>
         <footer className="border-t border-ink/10 py-6 text-center text-sm text-clay">
-          Made with 🧡 in SF at the MLH AI for Social Good hackathon · powered by
-          DigitalOcean Gradient AI · civic data from DataSF
+          Made with care in San Francisco at the MLH AI for Social Good hackathon ·
+          powered by DigitalOcean Gradient AI · civic data from DataSF
         </footer>
       </body>
     </html>

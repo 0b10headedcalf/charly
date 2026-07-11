@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { CharlyMascot } from "@/components/CharlyMascot";
+import { GroupBadge } from "@/components/GroupBadge";
 import { CAUSE_OPTIONS, STYLE_OPTIONS, TIME_OPTIONS } from "@/lib/survey";
 import type { MatchResult } from "@/lib/types";
 
@@ -11,7 +12,7 @@ type Step = "intro" | "causes" | "styles" | "time" | "followup" | "reveal";
 const STEP_ORDER: Step[] = ["intro", "causes", "styles", "time", "followup", "reveal"];
 
 const BUBBLES: Record<Step, string> = {
-  intro: "Hi!! I'm Charly 🧡 Five quick taps and I'll find the crew where you'll do the most good. No forms, promise. Well... one tiny fun one.",
+  intro: "Hi, I'm Charly. Five quick taps and I'll find the crew where you'll do the most good. No forms, promise — well, one tiny fun one.",
   causes: "What pulls at your heart? Pick as many as you like.",
   styles: "How do you actually like to help?",
   time: "How much time feels right?",
@@ -157,7 +158,7 @@ export function SurveyFlow({ userName }: { userName: string }) {
             onClick={() => setStep("causes")}
             className="mx-auto block rounded-full bg-coral px-8 py-3 text-lg font-bold text-white shadow-md hover:bg-coral-deep"
           >
-            Let&apos;s go ✨
+            Let&apos;s go
           </button>
         )}
 
@@ -273,7 +274,9 @@ export function SurveyFlow({ userName }: { userName: string }) {
                 className="flyer w-full max-w-sm p-6 text-center"
                 style={{ "--pin-color": matched.group.color } as React.CSSProperties}
               >
-                <div className="text-4xl">{matched.group.emoji}</div>
+                <div className="flex justify-center">
+                  <GroupBadge group={matched.group} size={56} />
+                </div>
                 <h2 className="mt-2 text-2xl font-extrabold">{matched.group.name}</h2>
                 <p className="mt-1 font-semibold" style={{ color: matched.group.color }}>
                   {matched.group.tagline}

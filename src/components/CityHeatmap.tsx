@@ -68,7 +68,7 @@ export function CityHeatmap({ heat }: { heat: Heatmap }) {
               }`}
               style={l.groupId === active ? { backgroundColor: LAYER_COLOR[l.groupId] } : undefined}
             >
-              {l.groupId === "housing" ? "🏠 Housing signals" : "🌱 Environment signals"}
+              {l.groupId === "housing" ? "Housing signals" : "Environment signals"}
             </button>
           ))}
         </div>

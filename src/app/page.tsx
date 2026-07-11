@@ -35,7 +35,7 @@ export default async function Home() {
             href="/join"
             className="rounded-full bg-coral px-7 py-3 text-lg font-bold text-white shadow-md transition hover:bg-coral-deep hover:shadow-lg"
           >
-            Meet Charly 🧡
+            Meet Charly
           </Link>
           <Link
             href="/dashboard"
@@ -52,21 +52,20 @@ export default async function Home() {
           {
             step: "Survey",
             text: "Charly's welcome survey — a few taps, plus one question an AI writes just for you.",
-            emoji: "📝",
           },
           {
             step: "Match",
             text: "A DigitalOcean AI agent sorts you into the right neighborhood crew.",
-            emoji: "🧭",
           },
           {
             step: "Mobilize",
             text: "A planner agent drafts your crew's next two weeks with real local orgs.",
-            emoji: "📌",
           },
-        ].map((s) => (
+        ].map((s, i) => (
           <div key={s.step} className="rounded-xl bg-kraft/60 p-5">
-            <div className="text-2xl">{s.emoji}</div>
+            <div className="font-display text-2xl font-bold text-marigold-deep">
+              {String(i + 1).padStart(2, "0")}
+            </div>
             <h2 className="mt-1 text-xl font-bold">{s.step}</h2>
             <p className="mt-1 text-sm leading-snug text-clay">{s.text}</p>
           </div>

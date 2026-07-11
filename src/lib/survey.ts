@@ -3,22 +3,22 @@
 // from a cheap model; then everything is summarized + classified.
 
 export const CAUSE_OPTIONS = [
-  { id: "food", label: "🥕 Food & hunger" },
-  { id: "housing", label: "🏠 Housing & homelessness" },
-  { id: "environment", label: "🌱 Parks & environment" },
-  { id: "education", label: "📚 Kids & education" },
-  { id: "elders", label: "🌷 Older neighbors" },
-  { id: "animals", label: "🐾 Animals" },
+  { id: "food", label: "Food & hunger" },
+  { id: "housing", label: "Housing & homelessness" },
+  { id: "environment", label: "Parks & environment" },
+  { id: "education", label: "Kids & education" },
+  { id: "elders", label: "Older neighbors" },
+  { id: "animals", label: "Animals" },
 ];
 
 export const STYLE_OPTIONS = [
-  { id: "hands-on", label: "💪 Hands-on work" },
-  { id: "driving", label: "🚗 Driving & deliveries" },
-  { id: "teaching", label: "🧑‍🏫 Teaching & mentoring" },
-  { id: "cooking", label: "🍲 Cooking" },
-  { id: "tech", label: "📱 Tech help" },
-  { id: "organizing", label: "📋 Organizing people" },
-  { id: "listening", label: "💬 Visiting & listening" },
+  { id: "hands-on", label: "Hands-on work" },
+  { id: "driving", label: "Driving & deliveries" },
+  { id: "teaching", label: "Teaching & mentoring" },
+  { id: "cooking", label: "Cooking" },
+  { id: "tech", label: "Tech help" },
+  { id: "organizing", label: "Organizing people" },
+  { id: "listening", label: "Visiting & listening" },
 ];
 
 export const TIME_OPTIONS = [

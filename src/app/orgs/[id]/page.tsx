@@ -46,7 +46,7 @@ export default async function OrgPage({
               className="mr-2 font-bold"
               style={{ color: g.color }}
             >
-              {g.emoji} {g.name}
+              {g.name}
             </Link>
           ))}
         </p>

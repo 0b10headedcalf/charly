@@ -166,9 +166,11 @@ function EventCard({
       </p>
 
       {event.log.length > 0 && (
-        <ul className="mt-3 space-y-1 border-t border-ink/10 pt-3 text-sm text-clay">
+        <ul className="mt-3 space-y-1.5 border-t border-ink/10 pt-3 text-sm text-clay">
           {event.log.map((l, i) => (
-            <li key={i}>📎 {l.text}</li>
+            <li key={i} className="border-l-2 border-marigold/60 pl-2.5">
+              {l.text}
+            </li>
           ))}
         </ul>
       )}

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import orgsData from "../../../../data/orgs.json";
 import { EventCallouts } from "@/components/EventCallouts";
+import { GroupBadge } from "@/components/GroupBadge";
 import { PlanSection } from "@/components/PlanSection";
 import { groupById } from "@/lib/matching";
 import { readState } from "@/lib/store";
@@ -32,12 +33,7 @@ export default async function GroupPage({
       </Link>
 
       <header className="mt-4 flex items-center gap-4">
-        <div
-          className="flex h-16 w-16 items-center justify-center rounded-2xl text-4xl"
-          style={{ backgroundColor: `${group.color}22` }}
-        >
-          {group.emoji}
-        </div>
+        <GroupBadge group={group} size={64} />
         <div>
           <h1 className="text-3xl font-extrabold leading-tight">{group.name}</h1>
           <p className="font-semibold" style={{ color: group.color }}>

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { GroupBadge } from "@/components/GroupBadge";
 import { getSession } from "@/lib/auth";
 import { groupById } from "@/lib/matching";
 import { readState } from "@/lib/store";
@@ -59,7 +60,7 @@ export default async function ProfilePage() {
           >
             <p className="text-xs font-bold uppercase tracking-wide text-clay">Your crew</p>
             <div className="mt-1 flex items-center gap-3">
-              <span className="text-3xl">{group.emoji}</span>
+              <GroupBadge group={group} size={48} />
               <div>
                 <h2 className="text-xl font-extrabold leading-tight">{group.name}</h2>
                 <p className="text-sm font-semibold" style={{ color: group.color }}>
