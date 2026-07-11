@@ -59,12 +59,9 @@ export default async function Home() {
             step: "Mobilize",
             text: "A planner agent drafts your crew's next two weeks with real local orgs.",
           },
-        ].map((s, i) => (
+        ].map((s) => (
           <div key={s.step} className="rounded-xl bg-kraft/60 p-5">
-            <div className="font-display text-2xl font-bold text-marigold-deep">
-              {String(i + 1).padStart(2, "0")}
-            </div>
-            <h2 className="mt-1 text-xl font-bold">{s.step}</h2>
+            <h2 className="text-xl font-bold">{s.step}</h2>
             <p className="mt-1 text-sm leading-snug text-clay">{s.text}</p>
           </div>
         ))}

@@ -4,6 +4,7 @@ import orgsData from "../../../../data/orgs.json";
 import { EventCallouts } from "@/components/EventCallouts";
 import { GroupBadge } from "@/components/GroupBadge";
 import { PlanSection } from "@/components/PlanSection";
+import { syntheticContact } from "@/lib/contact";
 import { groupById } from "@/lib/matching";
 import { readState } from "@/lib/store";
 import type { Org } from "@/lib/types";
@@ -84,14 +85,20 @@ export default async function GroupPage({
             <span className="text-base font-semibold text-clay">({members.length})</span>
           </h2>
           <ul className="mt-4 space-y-3">
-            {members.slice(0, 14).map((m) => (
-              <li key={m.id} className="rounded-xl bg-white/80 px-4 py-2.5 shadow-sm">
-                <span className="font-bold">{m.name}</span>
-                {m.interests.length > 0 && (
-                  <span className="block text-xs text-clay">{m.interests.join(" · ")}</span>
-                )}
-              </li>
-            ))}
+            {members.slice(0, 14).map((m) => {
+              const contact = syntheticContact(m);
+              return (
+                <li key={m.id} className="rounded-xl bg-white/80 px-4 py-2.5 shadow-sm">
+                  <span className="font-bold">{m.name}</span>
+                  {m.interests.length > 0 && (
+                    <span className="block text-xs text-clay">{m.interests.join(" · ")}</span>
+                  )}
+                  <span className="mt-1 block text-xs text-clay">
+                    {contact.email} · {contact.phone}
+                  </span>
+                </li>
+              );
+            })}
           </ul>
           {members.length === 0 && (
             <p className="mt-4 text-sm text-clay">

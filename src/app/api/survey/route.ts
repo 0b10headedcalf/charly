@@ -8,11 +8,12 @@ import { addMember } from "@/lib/store";
 import type { Member } from "@/lib/types";
 
 const DEFAULT_FOLLOWUP = {
-  question: "What would make you proudest to look back on after a month of helping out?",
+  question:
+    "Think of a time someone showed up for you when it really mattered. What would it mean to be that person for a neighbor this month?",
   options: [
-    "A neighbor I actually got to know",
-    "Something visible in my neighborhood",
-    "A skill I passed on to someone",
+    "Someone fed me once — I want to pass that on",
+    "I know how lonely it gets; nobody should feel invisible",
+    "I want my block to feel like it did when I was a kid",
   ],
 };
 
@@ -41,11 +42,11 @@ export async function POST(req: Request) {
           {
             role: "user",
             content: `A new volunteer answered an onboarding survey: ${answersToText(answers)}
-Write ONE short, warm, personal follow-up question (max 20 words, no emojis) that digs one level deeper into what they'd love doing, plus 3 short answer options (max 8 words each, no emojis).
+Write ONE intimate, heartfelt follow-up question (max 35 words, no emojis) that clearly references their specific answers and gently asks about the personal "why" underneath — a memory, a person, or a moment that made them care about this. It should feel like a close friend asking, not a form. Also give 3 answer options (max 12 words each, no emojis) written in a vulnerable first-person voice, each hinting at a different kind of story.
 Reply with ONLY this JSON: {"question": "...", "options": ["...", "...", "..."]}`,
           },
         ],
-        max_completion_tokens: 150,
+        max_completion_tokens: 250,
         temperature: 0.8,
       });
       const parsed = extractJson<{ question: string; options: string[] }>(

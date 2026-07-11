@@ -16,7 +16,7 @@ const BUBBLES: Record<Step, string> = {
   causes: "What pulls at your heart? Pick as many as you like.",
   styles: "How do you actually like to help?",
   time: "How much time feels right?",
-  followup: "Last one — I made this question just for you:",
+  followup: "Okay, last one. This one's just between us — I wrote it only for you, and there's no wrong answer:",
   reveal: "Drumroll…",
 };
 
@@ -80,7 +80,8 @@ export function SurveyFlow({ userName }: { userName: string }) {
       setFollowup({ question: data.question, options: data.options ?? [] });
     } catch {
       setFollowup({
-        question: "What would make you proudest after a month of helping?",
+        question:
+          "Think of a time someone showed up for you when it really mattered. What would it mean to be that person for a neighbor this month?",
         options: [],
       });
     } finally {
@@ -238,7 +239,7 @@ export function SurveyFlow({ userName }: { userName: string }) {
                   <input
                     value={followupAnswer}
                     onChange={(e) => setFollowupAnswer(e.target.value)}
-                    placeholder="…or say it your way"
+                    placeholder="…or tell me the real story, in your own words"
                     className="flex-1 rounded-full border-2 border-ink/15 bg-white px-4 py-2.5 text-sm outline-none focus:border-coral"
                   />
                   <button

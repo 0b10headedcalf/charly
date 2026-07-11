@@ -48,30 +48,41 @@ h1, h2, h3, .font-display {
   font-family: var(--font-display);
 }
 
-/* Bulletin-board flyer card: the signature element. */
+/* Bulletin-board sticky note: the signature element.
+   --pin-color (per group) now tints the note paper. */
 .flyer {
   position: relative;
-  background: #fffbf0;
-  border: 1px solid rgba(59, 42, 32, 0.1);
-  border-radius: 10px;
+  background: linear-gradient(
+    165deg,
+    color-mix(in srgb, var(--pin-color, #e8960c) 9%, #fffbea) 0%,
+    color-mix(in srgb, var(--pin-color, #e8960c) 20%, #fbf1cf) 100%
+  );
+  border: none;
+  border-radius: 2px 2px 0 2px;
   box-shadow: var(--shadow-flyer);
   transition: transform 180ms ease, box-shadow 180ms ease;
 }
-.flyer::before {
-  /* pushpin */
+.flyer::after {
+  /* curled bottom-right corner */
   content: "";
   position: absolute;
-  top: -7px;
-  left: 50%;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 30%, #ffd27a, var(--pin-color, #e5543f) 65%);
-  box-shadow: 0 2px 3px rgba(59, 42, 32, 0.35);
-  transform: translateX(-50%);
+  right: 0;
+  bottom: 0;
+  width: 26px;
+  height: 26px;
+  background: linear-gradient(
+    to top left,
+    var(--color-paper) 47%,
+    rgba(59, 42, 32, 0.18) 50%,
+    color-mix(in srgb, var(--pin-color, #e8960c) 14%, #f3e6bd) 54%,
+    color-mix(in srgb, var(--pin-color, #e8960c) 8%, #fdf6dd) 100%
+  );
+  box-shadow: -2px -2px 4px rgba(59, 42, 32, 0.08);
+  border-radius: 0 0 0 4px;
+  pointer-events: none;
 }
-.flyer.tilt-l { transform: rotate(-1.4deg); }
-.flyer.tilt-r { transform: rotate(1.2deg); }
+.flyer.tilt-l { transform: rotate(-1.6deg); }
+.flyer.tilt-r { transform: rotate(1.4deg); }
 .flyer:hover {
   transform: rotate(0deg) translateY(-3px);
   box-shadow: var(--shadow-flyer-lift);
