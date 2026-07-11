@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import orgsData from "../../../../data/orgs.json";
+import { EventCallouts } from "@/components/EventCallouts";
 import { PlanSection } from "@/components/PlanSection";
 import { groupById } from "@/lib/matching";
 import { readState } from "@/lib/store";
@@ -49,6 +50,12 @@ export default async function GroupPage({
       <div className="mt-10 grid gap-10 lg:grid-cols-[1fr_340px]">
         <div>
           <PlanSection groupId={group.id} groupColor={group.color} initialPlan={existingPlan} />
+
+          <EventCallouts
+            initialEvents={state.events.filter((e) => e.groupIds.includes(group.id))}
+            orgNames={Object.fromEntries((orgsData as Org[]).map((o) => [o.id, o.name]))}
+            color={group.color}
+          />
 
           <section className="mt-10">
             <h2 className="text-xl font-bold">Partner orgs on the board</h2>

@@ -40,6 +40,9 @@ export default function RootLayout({
               <Link href="/groups" className="rounded-full px-3 py-1.5 hover:bg-kraft">
                 Groups
               </Link>
+              <Link href="/orgs" className="rounded-full px-3 py-1.5 hover:bg-kraft">
+                Org HQ
+              </Link>
               <Link href="/dashboard" className="rounded-full px-3 py-1.5 hover:bg-kraft">
                 Community board
               </Link>

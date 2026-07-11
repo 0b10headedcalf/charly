@@ -42,7 +42,18 @@ export default function ChatPage() {
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Something went wrong");
       setMessages((m) => [...m, { role: "assistant", content: data.reply }]);
-      if (data.matched) setMatched(data.matched as MatchResult);
+      if (data.matched) {
+        setMatched(data.matched as MatchResult);
+        try {
+          // event signup buttons on group pages reuse this
+          localStorage.setItem(
+            "charly-member",
+            JSON.stringify({ name, groupId: data.matched.group.id })
+          );
+        } catch {
+          // storage unavailable — signups will just prompt for a name
+        }
+      }
     } catch (e) {
       setError(e instanceof Error ? e.message : "Something went wrong");
     } finally {

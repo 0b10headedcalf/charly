@@ -1,0 +1,52 @@
+[
+  {
+    "id": "evt-fridge-blitz",
+    "orgId": "mission-community-fridge",
+    "groupIds": ["food-security"],
+    "title": "Saturday Fridge Restock Blitz",
+    "description": "Restock all six fridges before the weekend rush. Meet at the 18th St fridge, routes assigned on arrival.",
+    "when": "Saturday, July 18 · 9:00am",
+    "needs": ["6 restockers", "2 drivers with cars"],
+    "signups": [
+      { "name": "Maya R.", "at": "2026-07-09T18:00:00Z" },
+      { "name": "Ben W.", "at": "2026-07-10T02:30:00Z" }
+    ],
+    "log": [
+      { "text": "Confirmed produce donation from the Alemany farmers market — 40 lbs.", "at": "2026-07-09T20:00:00Z" },
+      { "text": "Need one more driver for the Bernal route.", "at": "2026-07-10T16:00:00Z" }
+    ],
+    "createdAt": "2026-07-08T17:00:00Z"
+  },
+  {
+    "id": "evt-beach-cleanup",
+    "orgId": "ocean-beach-brigade",
+    "groupIds": ["environment"],
+    "title": "Ocean Beach Mega-Cleanup",
+    "description": "Monthly big one: Stairwell 17 to Sloat. Gloves, grabbers, and data cards provided.",
+    "when": "Sunday, July 19 · 10:00am",
+    "needs": ["cleanup captains", "data loggers", "gear table host"],
+    "signups": [
+      { "name": "Grace Y.", "at": "2026-07-09T15:00:00Z" },
+      { "name": "Ren S.", "at": "2026-07-09T22:10:00Z" },
+      { "name": "Quinn B.", "at": "2026-07-10T01:45:00Z" }
+    ],
+    "log": [
+      { "text": "City confirmed extra bins at Stairwell 21.", "at": "2026-07-09T19:00:00Z" }
+    ],
+    "createdAt": "2026-07-07T21:00:00Z"
+  },
+  {
+    "id": "evt-tech-tea",
+    "orgId": "tech-tea-time",
+    "groupIds": ["elders", "education"],
+    "title": "Tech & Tea: Scam-Proofing Session",
+    "description": "Help seniors lock down their phones against scam calls and texts. Cantonese speakers especially welcome.",
+    "when": "Wednesday, July 15 · 2:00pm",
+    "needs": ["4 patient tech helpers", "1 Cantonese speaker", "greeter"],
+    "signups": [
+      { "name": "Pat E.", "at": "2026-07-10T04:00:00Z" }
+    ],
+    "log": [],
+    "createdAt": "2026-07-08T23:00:00Z"
+  }
+]

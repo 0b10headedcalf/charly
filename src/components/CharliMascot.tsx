@@ -1,7 +1,32 @@
-// PLACEHOLDER ART — Charli the flame-heart blob.
-// Swap this SVG for the hand-drawn mascot later: either replace the SVG body
-// below or render <img src="/charli.png"> with the same size prop.
+"use client";
+
+import { useState } from "react";
+
+// Charli the mascot. Drop your Aseprite export at public/charli.gif and it
+// renders automatically (pixel-crisp, no smoothing). Until that file exists,
+// the placeholder SVG below is shown instead.
 export function CharliMascot({ size = 96 }: { size?: number }) {
+  // SVG shows immediately; swaps to the gif only once it actually loads,
+  // so there's no broken-image flash while the gif doesn't exist yet.
+  const [gifReady, setGifReady] = useState(false);
+
+  return (
+    <>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/charli.gif"
+        alt="Charli the mascot"
+        width={size}
+        height={size}
+        style={{ imageRendering: "pixelated", display: gifReady ? "block" : "none" }}
+        onLoad={() => setGifReady(true)}
+      />
+      {!gifReady && <PlaceholderCharli size={size} />}
+    </>
+  );
+}
+
+function PlaceholderCharli({ size }: { size: number }) {
   return (
     <svg
       width={size}

@@ -35,9 +35,23 @@ export type ActionPlan = {
   generatedAt: string;
 };
 
+export type OrgEvent = {
+  id: string;
+  orgId: string;
+  groupIds: string[];
+  title: string;
+  description: string;
+  when: string;
+  needs: string[];
+  signups: { name: string; at: string }[];
+  log: { text: string; at: string }[];
+  createdAt: string;
+};
+
 export type AppState = {
   members: Member[];
   plans: Record<string, ActionPlan>;
+  events: OrgEvent[];
 };
 
 export type ChatMessage = {

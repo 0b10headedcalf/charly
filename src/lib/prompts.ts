@@ -35,6 +35,25 @@ Bullet list mapping the group's member interests to the roles the partner orgs n
 
 Rules: be specific and actionable, reference only the organizations provided, keep it under 300 words, warm but no fluff.`;
 
+// System prompt for the Org Copilot: answers questions for organization admins
+// over their live recruiting + recordkeeping data. When a console agent with
+// the orgs knowledge base is configured (PLANNER_ENDPOINT), the KB adds
+// background on every partner org; the live records are always passed inline.
+export const ORG_COPILOT_SYSTEM_PROMPT = `You are the operations copilot for a community aid organization using Charly, a grassroots volunteering platform in San Francisco. You answer the organizer's questions using their records: upcoming events, volunteer signups, needs, and log notes.
+
+Rules:
+- Be concise and practical. Use short paragraphs or bullets.
+- When asked who signed up, list names. When asked what's missing, compare needs against signups.
+- Happily draft recruitment messages, thank-you notes, or event summaries when asked.
+- If the records don't contain the answer, say so plainly — never invent volunteers, dates, or numbers.`;
+
+export function copilotUserPrompt(recordsBlock: string, question: string) {
+  return `Organization records:
+${recordsBlock}
+
+Organizer's question: ${question}`;
+}
+
 export function plannerUserPrompt(input: {
   groupName: string;
   groupDescription: string;
