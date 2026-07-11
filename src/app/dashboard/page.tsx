@@ -1,13 +1,14 @@
 import orgsData from "../../../data/orgs.json";
 import { DashboardCharts } from "@/components/DashboardCharts";
 import { allGroups } from "@/lib/matching";
+import { getCityPulse } from "@/lib/sfdata";
 import { readState } from "@/lib/store";
 import type { Org } from "@/lib/types";
 
 export const dynamic = "force-dynamic";
 
 export default async function DashboardPage() {
-  const state = await readState();
+  const [state, pulse] = await Promise.all([readState(), getCityPulse()]);
   const orgs = orgsData as Org[];
 
   const crewData = allGroups.map((g) => ({
@@ -58,7 +59,7 @@ export default async function DashboardPage() {
         ))}
       </div>
 
-      <DashboardCharts crewData={crewData} interests={interests} />
+      <DashboardCharts crewData={crewData} interests={interests} pulse={pulse} />
     </div>
   );
 }

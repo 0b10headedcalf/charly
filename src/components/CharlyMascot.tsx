@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 
-// Charli the mascot. Drop your Aseprite export at public/charli.gif and it
+// Charly the mascot. Drop your Aseprite export at public/charly.gif and it
 // renders automatically (pixel-crisp, no smoothing). Until that file exists,
 // the placeholder SVG below is shown instead.
-export function CharliMascot({ size = 96 }: { size?: number }) {
+export function CharlyMascot({ size = 96 }: { size?: number }) {
   // SVG shows immediately; swaps to the gif only once it actually loads,
   // so there's no broken-image flash while the gif doesn't exist yet.
   const [gifReady, setGifReady] = useState(false);
@@ -14,26 +14,26 @@ export function CharliMascot({ size = 96 }: { size?: number }) {
     <>
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src="/charli.gif"
-        alt="Charli the mascot"
+        src="/charly.gif"
+        alt="Charly the mascot"
         width={size}
         height={size}
         style={{ imageRendering: "pixelated", display: gifReady ? "block" : "none" }}
         onLoad={() => setGifReady(true)}
       />
-      {!gifReady && <PlaceholderCharli size={size} />}
+      {!gifReady && <PlaceholderCharly size={size} />}
     </>
   );
 }
 
-function PlaceholderCharli({ size }: { size: number }) {
+function PlaceholderCharly({ size }: { size: number }) {
   return (
     <svg
       width={size}
       height={size}
       viewBox="0 0 100 100"
       role="img"
-      aria-label="Charli the mascot"
+      aria-label="Charly the mascot"
     >
       {/* body: rounded flame/heart blob */}
       <path

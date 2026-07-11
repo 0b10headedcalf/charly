@@ -3,7 +3,7 @@
 **Find your people. Fix your corner of the world.**
 
 Charly is a grassroots community-organizing platform built for the MLH **AI for
-Social Good** hackathon. Charli, the mascot agent, chats with new members about
+Social Good** hackathon. Charly, the mascot agent, chats with new members about
 what they care about, an AI matcher sorts them into neighborhood volunteer
 crews, and a planner agent drafts each crew's next two weeks in coordination
 with real local aid organizations.
@@ -12,7 +12,7 @@ with real local aid organizations.
 
 | Feature | Where |
 |---|---|
-| **Agent Platform agent** (Charli persona, structured matching output) | onboarding chat |
+| **Agent Platform agent** (Charly persona, structured matching output) | onboarding chat |
 | **Agent Platform agent + Knowledge Base RAG** (org data, retrieval citations) | crew action plans |
 | **Serverless inference** (`llama3.3-70b-instruct`) | interest → crew classification |
 | **Agent + KB (or inference) over live records** | Org HQ ops copilot |
@@ -34,7 +34,7 @@ key, agents, knowledge base).
 ## Tour
 
 - `/` — the neighborhood board: crews pinned as flyers
-- `/chat` — meet Charli, get matched into a crew
+- `/chat` — meet Charly, get matched into a crew
 - `/groups/<id>` — crew page: members, partner orgs, AI action plan, live event callouts with one-tap signup
 - `/orgs/<id>` — Org HQ: partner orgs post recruiting events, track signups, keep record notes, and ask an AI ops copilot questions over their live records
 - `/dashboard` — community board: live matching + capacity charts
@@ -45,6 +45,6 @@ Next.js 16 (App Router) · Tailwind 4 · Recharts · OpenAI SDK pointed at
 DigitalOcean's OpenAI-compatible endpoints · JSON file store (hackathon-grade
 persistence, no DB required).
 
-> 🎨 Mascot note: drop your Aseprite export at `public/charli.gif` and every
+> 🎨 Mascot note: drop your Aseprite export at `public/charly.gif` and every
 > mascot instance switches to it automatically (pixel-crisp rendering). Until
-> then the placeholder SVG in `src/components/CharliMascot.tsx` shows.
+> then the placeholder SVG in `src/components/CharlyMascot.tsx` shows.

@@ -41,7 +41,7 @@ export default async function ProfilePage() {
         <div>
           <h1 className="text-3xl font-extrabold leading-tight">{session.name}</h1>
           <p className="text-sm font-bold uppercase tracking-wide text-clay">
-            {session.provider === "github" ? "Signed in with GitHub" : "Guest account"}
+            {session.provider === "google" ? "Signed in with Google" : "Guest account"}
           </p>
         </div>
         <form action="/api/auth/signout" method="POST" className="ml-auto">
@@ -99,7 +99,7 @@ export default async function ProfilePage() {
             href="/join"
             className="mt-3 inline-block rounded-full bg-coral px-6 py-2.5 font-bold text-white hover:bg-coral-deep"
           >
-            Take Charli&apos;s welcome survey
+            Take Charly&apos;s welcome survey
           </Link>
         </div>
       )}

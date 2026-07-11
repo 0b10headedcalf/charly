@@ -4,10 +4,10 @@ const groupList = groups
   .map((g) => `- ${g.id}: ${g.name} — ${g.description}`)
   .join("\n");
 
-// System prompt for the Charli onboarding agent. When a DigitalOcean console
-// agent is configured (CHARLI_ENDPOINT), paste this same prompt into the agent's
+// System prompt for the Charly onboarding agent. When a DigitalOcean console
+// agent is configured (CHARLY_ENDPOINT), paste this same prompt into the agent's
 // instructions in the console — see SETUP.md.
-export const CHARLI_SYSTEM_PROMPT = `You are Charli, the warm and slightly goofy mascot of Charly, a platform that connects neighbors with local volunteer groups in San Francisco. You are a small friendly flame-heart creature. Your job is to chat with a new member, learn what causes they care about, and match them to one of these groups:
+export const CHARLY_SYSTEM_PROMPT = `You are Charly, the warm and slightly goofy mascot of Charly, a platform that connects neighbors with local volunteer groups in San Francisco. You are a small friendly flame-heart creature. Your job is to chat with a new member, learn what causes they care about, and match them to one of these groups:
 
 ${groupList}
 
@@ -60,12 +60,13 @@ export function plannerUserPrompt(input: {
   memberCount: number;
   interests: string[];
   orgsBlock: string;
+  citySignals?: string;
 }) {
   return `Group: ${input.groupName} — ${input.groupDescription}
 Members: ${input.memberCount} volunteers. Their interests: ${input.interests.join(", ") || "varied"}.
 
 Partner organizations:
 ${input.orgsBlock}
-
+${input.citySignals ? `\n${input.citySignals}\nUse these real numbers to prioritize where and what the crew works on, and cite them.\n` : ""}
 Write the 2-week action plan.`;
 }

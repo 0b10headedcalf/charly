@@ -5,7 +5,7 @@ export type Session = {
   id: string;
   name: string;
   avatarUrl?: string;
-  provider: "github" | "guest";
+  provider: "google" | "guest";
 };
 
 const COOKIE = "charly-session";
@@ -53,6 +53,6 @@ export function sessionCookie(session: Session) {
 
 export const SESSION_COOKIE_NAME = COOKIE;
 
-export function githubConfigured(): boolean {
-  return Boolean(process.env.GITHUB_CLIENT_ID && process.env.GITHUB_CLIENT_SECRET);
+export function googleConfigured(): boolean {
+  return Boolean(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET);
 }

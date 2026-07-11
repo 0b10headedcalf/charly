@@ -43,12 +43,25 @@ function Card({ title, sub, children }: { title: string; sub: string; children: 
   );
 }
 
+type Pulse = {
+  fetchedAt: string;
+  source: "live" | "snapshot";
+  categories: { service: string; count: number; groupId?: string }[];
+  hotspots: {
+    label: string;
+    groupId: string;
+    neighborhoods: { name: string; count: number }[];
+  }[];
+};
+
 export function DashboardCharts({
   crewData,
   interests,
+  pulse,
 }: {
   crewData: CrewDatum[];
   interests: { tag: string; count: number }[];
+  pulse: Pulse;
 }) {
   const byMembers = [...crewData]
     .sort((a, b) => b.members - a.members)
@@ -64,7 +77,7 @@ export function DashboardCharts({
     <>
       <Card
         title="Neighbors per crew"
-        sub="Where people landed after chatting with Charli."
+        sub="Where people landed after chatting with Charly."
       >
         <ResponsiveContainer width="100%" height={260}>
           <BarChart data={byMembers} layout="vertical" margin={{ left: 8, right: 32 }}>
@@ -125,7 +138,67 @@ export function DashboardCharts({
         </ResponsiveContainer>
       </Card>
 
-      <Card title="What people care about" sub="Most common interests Charli heard in onboarding chats.">
+      <Card
+        title="City pulse — where SF needs hands"
+        sub={`${pulse.source === "live" ? "Live from DataSF" : "DataSF snapshot"} (SF311 reports, last 30 days), colored by the crew that can act on them.`}
+      >
+        <ResponsiveContainer width="100%" height={Math.max(160, pulse.categories.length * 36)}>
+          <BarChart
+            data={pulse.categories.map((c) => ({
+              ...c,
+              fill: crewData.find((d) => d.id === c.groupId)?.color ?? CLAY,
+            }))}
+            layout="vertical"
+            margin={{ left: 8, right: 48 }}
+          >
+            <CartesianGrid horizontal={false} stroke={GRID} />
+            <XAxis type="number" hide />
+            <YAxis
+              type="category"
+              dataKey="service"
+              width={210}
+              tick={{ fill: INK, fontSize: 12 }}
+              axisLine={false}
+              tickLine={false}
+            />
+            <Tooltip
+              contentStyle={tooltipStyle}
+              cursor={{ fill: "rgba(59,42,32,0.04)" }}
+              formatter={(v) => [`${Number(v).toLocaleString()} reports`, ""]}
+            />
+            <Bar dataKey="count" barSize={14} radius={[0, 4, 4, 0]}>
+              <LabelList
+                dataKey="count"
+                position="right"
+                fill={INK}
+                fontSize={12}
+                fontWeight={700}
+                formatter={(v) => Number(v).toLocaleString()}
+              />
+            </Bar>
+          </BarChart>
+        </ResponsiveContainer>
+        <div className="mt-3 space-y-1 border-t border-ink/10 pt-3">
+          {pulse.hotspots.map((h) => (
+            <p key={h.label} className="text-sm">
+              <span
+                className="font-bold"
+                style={{ color: crewData.find((d) => d.id === h.groupId)?.color ?? INK }}
+              >
+                {h.label}:
+              </span>{" "}
+              <span className="text-clay">
+                {h.neighborhoods.map((n) => `${n.name} (${n.count.toLocaleString()})`).join(" · ")}
+              </span>
+            </p>
+          ))}
+          <p className="pt-1 text-xs text-clay">
+            Source: data.sfgov.org — these numbers also feed the planner agent&apos;s action plans.
+          </p>
+        </div>
+      </Card>
+
+      <Card title="What people care about" sub="Most common interests Charly heard in onboarding chats.">
         <ResponsiveContainer width="100%" height={Math.max(160, interests.length * 34)}>
           <BarChart data={interests} layout="vertical" margin={{ left: 8, right: 32 }}>
             <CartesianGrid horizontal={false} stroke={GRID} />

@@ -1,4 +1,4 @@
-// The fixed skeleton of Charli's welcome survey. Steps 1-3 are structured
+// The fixed skeleton of Charly's welcome survey. Steps 1-3 are structured
 // UI (no model needed); step 4 is a single AI-generated follow-up question
 // from a cheap model; then everything is summarized + classified.
 

@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
-import { CharliMascot } from "@/components/CharliMascot";
-import { getSession, githubConfigured } from "@/lib/auth";
+import { CharlyMascot } from "@/components/CharlyMascot";
+import { getSession, googleConfigured } from "@/lib/auth";
 
 export const dynamic = "force-dynamic";
 
@@ -12,39 +12,39 @@ export default async function SignInPage({
   const session = await getSession();
   if (session) redirect("/join");
   const { error } = await searchParams;
-  const hasGithub = githubConfigured();
+  const hasGoogle = googleConfigured();
 
   return (
     <div className="mx-auto flex max-w-md flex-col items-center gap-5 px-4 py-20 text-center">
-      <CharliMascot size={110} />
+      <CharlyMascot size={110} />
       <h1 className="text-3xl font-extrabold">Join the neighborhood</h1>
       <p className="text-clay">
-        Sign in, take Charli&apos;s two-minute welcome survey, and get matched with
+        Sign in, take Charly&apos;s two-minute welcome survey, and get matched with
         your volunteer crew.
       </p>
 
       {error && (
         <div className="w-full rounded-xl border-2 border-coral/40 bg-coral/10 px-4 py-3 text-sm">
-          {error === "github-not-configured"
-            ? "GitHub sign-in isn't configured yet — continue as a guest below."
+          {error === "google-not-configured"
+            ? "Google sign-in isn't configured yet — continue as a guest below."
             : error === "name-required"
               ? "Please enter a name to continue."
               : "Sign-in didn't work — try again or continue as a guest."}
         </div>
       )}
 
-      {hasGithub && (
+      {hasGoogle && (
         <a
-          href="/api/auth/github"
+          href="/api/auth/google"
           className="w-full rounded-full bg-ink px-6 py-3 font-bold text-white shadow-md hover:opacity-90"
         >
-          Continue with GitHub
+          Continue with Google
         </a>
       )}
 
       <div className="flex w-full items-center gap-3 text-xs font-bold uppercase tracking-wide text-clay">
         <span className="h-px flex-1 bg-ink/10" />
-        {hasGithub ? "or" : "quick start"}
+        {hasGoogle ? "or" : "quick start"}
         <span className="h-px flex-1 bg-ink/10" />
       </div>
 
@@ -63,9 +63,9 @@ export default async function SignInPage({
           Continue
         </button>
       </form>
-      {!hasGithub && (
+      {!hasGoogle && (
         <p className="text-xs text-clay">
-          (GitHub OAuth appears here once GITHUB_CLIENT_ID/SECRET are set — see SETUP.md)
+          (Google OAuth appears here once GOOGLE_CLIENT_ID/SECRET are set — see SETUP.md)
         </p>
       )}
     </div>

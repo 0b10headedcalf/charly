@@ -99,7 +99,7 @@ export default async function GroupPage({
           </ul>
           {members.length === 0 && (
             <p className="mt-4 text-sm text-clay">
-              Nobody here yet — <Link href="/chat" className="font-bold text-coral">chat with Charli</Link> to join first.
+              Nobody here yet — <Link href="/chat" className="font-bold text-coral">chat with Charly</Link> to join first.
             </p>
           )}
         </aside>

@@ -7,7 +7,7 @@
  *   export DIGITALOCEAN_API_TOKEN=dop_v1_...   # console → API → Generate New Token (write scope)
  *   node scripts/provision-do-agents.mjs
  *
- * Creates: charli (survey persona), planner (organizing logistics),
+ * Creates: charly (survey persona), planner (organizing logistics),
  * scout (org info / RAG) + an access key for each, prints .env.local lines.
  * Also creates an empty knowledge base and attaches it to scout + planner;
  * uploading data/orgs.json into it is the one step left for the console.
@@ -40,11 +40,11 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const AGENTS = [
   {
     envPrefix: "CHARLI",
-    name: "charly-charli",
-    description: "Charli persona: member-facing conversation for Charly",
+    name: "charly-mascot",
+    description: "Charly persona: member-facing conversation for Charly",
     wantModel: /claude.*(sonnet|haiku)/i,
     instruction:
-      "You are Charli, the warm, slightly goofy flame-heart mascot of Charly, a grassroots volunteering platform in San Francisco. Be brief, playful, encouraging; 1-3 short sentences per reply. Help neighbors figure out how they want to help their community.",
+      "You are Charly, the warm, slightly goofy flame-heart mascot of Charly, a grassroots volunteering platform in San Francisco. Be brief, playful, encouraging; 1-3 short sentences per reply. Help neighbors figure out how they want to help their community.",
     attachKb: false,
   },
   {

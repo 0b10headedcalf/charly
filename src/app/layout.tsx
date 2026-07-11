@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Bricolage_Grotesque, Nunito_Sans } from "next/font/google";
 import Link from "next/link";
 import "./globals.css";
-import { CharliMascot } from "@/components/CharliMascot";
+import { CharlyMascot } from "@/components/CharlyMascot";
 
 const bricolage = Bricolage_Grotesque({
   variable: "--font-bricolage",
@@ -17,7 +17,7 @@ const nunito = Nunito_Sans({
 export const metadata: Metadata = {
   title: "Charly — find your people, help your neighborhood",
   description:
-    "Charli the mascot matches you with a local volunteer crew and AI agents coordinate the plan with neighborhood orgs.",
+    "Charly the mascot matches you with a local volunteer crew and AI agents coordinate the plan with neighborhood orgs.",
 };
 
 export default function RootLayout({
@@ -31,7 +31,7 @@ export default function RootLayout({
         <header className="sticky top-0 z-20 border-b border-ink/10 bg-paper/90 backdrop-blur">
           <nav className="mx-auto flex max-w-5xl items-center gap-6 px-4 py-3">
             <Link href="/" className="flex items-center gap-2">
-              <CharliMascot size={34} />
+              <CharlyMascot size={34} />
               <span className="font-display text-2xl font-bold tracking-tight">
                 Charly
               </span>
@@ -60,7 +60,8 @@ export default function RootLayout({
         </header>
         <main className="flex-1">{children}</main>
         <footer className="border-t border-ink/10 py-6 text-center text-sm text-clay">
-          Built at the MLH AI for Social Good hackathon · powered by DigitalOcean Gradient AI
+          Made with 🧡 in SF at the MLH AI for Social Good hackathon · powered by
+          DigitalOcean Gradient AI · civic data from DataSF
         </footer>
       </body>
     </html>

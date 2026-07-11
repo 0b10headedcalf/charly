@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import type { OrgEvent } from "@/lib/types";
 
-// Set by the chat page after Charli matches the user.
+// Set by the chat page after Charly matches the user.
 export const MEMBER_STORAGE_KEY = "charly-member";
 
 export function EventCallouts({

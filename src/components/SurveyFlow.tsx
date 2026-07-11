@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { CharliMascot } from "@/components/CharliMascot";
+import { CharlyMascot } from "@/components/CharlyMascot";
 import { CAUSE_OPTIONS, STYLE_OPTIONS, TIME_OPTIONS } from "@/lib/survey";
 import type { MatchResult } from "@/lib/types";
 
@@ -11,7 +11,7 @@ type Step = "intro" | "causes" | "styles" | "time" | "followup" | "reveal";
 const STEP_ORDER: Step[] = ["intro", "causes", "styles", "time", "followup", "reveal"];
 
 const BUBBLES: Record<Step, string> = {
-  intro: "Hi!! I'm Charli 🧡 Five quick taps and I'll find the crew where you'll do the most good. No forms, promise. Well... one tiny fun one.",
+  intro: "Hi!! I'm Charly 🧡 Five quick taps and I'll find the crew where you'll do the most good. No forms, promise. Well... one tiny fun one.",
   causes: "What pulls at your heart? Pick as many as you like.",
   styles: "How do you actually like to help?",
   time: "How much time feels right?",
@@ -135,10 +135,10 @@ export function SurveyFlow({ userName }: { userName: string }) {
         ))}
       </div>
 
-      {/* Charli + speech bubble */}
+      {/* Charly + speech bubble */}
       <div className="flex w-full items-start gap-3">
         <div className="shrink-0">
-          <CharliMascot size={64} />
+          <CharlyMascot size={64} />
         </div>
         <div className="relative flex-1 rounded-2xl rounded-bl-sm bg-white px-5 py-4 shadow-sm">
           {step === "intro" ? (
@@ -217,7 +217,7 @@ export function SurveyFlow({ userName }: { userName: string }) {
           <div>
             {busy || !followup ? (
               <p className="animate-pulse text-center text-clay">
-                Charli is thinking of the perfect question…
+                Charly is thinking of the perfect question…
               </p>
             ) : (
               <>

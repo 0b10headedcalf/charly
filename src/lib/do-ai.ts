@@ -22,17 +22,17 @@ export function inferenceClient(): OpenAI | null {
 }
 
 // Each role maps to its own DO Agent Platform agent (own endpoint + key):
-//   charli  — persona / member-facing conversation
+//   charly  — persona / member-facing conversation
 //   planner — community organizing logistics (action plans)
 //   scout   — org discovery & info, RAG over the orgs knowledge base
 // Resolution order per role:
 // 1. dedicated DO console agent (best: uses Agent Platform + knowledge base)
 // 2. DO serverless inference with the system prompt inlined
 // 3. mock (no keys yet — lets the app run before console setup)
-export type AgentRole = "charli" | "planner" | "scout";
+export type AgentRole = "charly" | "planner" | "scout";
 
 const AGENT_ENV: Record<AgentRole, { endpoint?: string; key?: string }> = {
-  charli: { endpoint: process.env.CHARLI_ENDPOINT, key: process.env.CHARLI_KEY },
+  charly: { endpoint: process.env.CHARLY_ENDPOINT, key: process.env.CHARLY_KEY },
   planner: { endpoint: process.env.PLANNER_ENDPOINT, key: process.env.PLANNER_KEY },
   scout: { endpoint: process.env.SCOUT_ENDPOINT, key: process.env.SCOUT_KEY },
 };

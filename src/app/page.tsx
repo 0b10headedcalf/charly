@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CharliMascot } from "@/components/CharliMascot";
+import { CharlyMascot } from "@/components/CharlyMascot";
 import { GroupFlyer } from "@/components/GroupFlyer";
 import { allGroups } from "@/lib/matching";
 import { readState } from "@/lib/store";
@@ -17,16 +17,16 @@ export default async function Home() {
     <div className="mx-auto max-w-5xl px-4">
       {/* hero */}
       <section className="flex flex-col items-center gap-6 py-14 text-center sm:py-20">
-        <div className="bounce-soft">
-          <CharliMascot size={132} />
+        <div className="sun-glow bounce-soft">
+          <CharlyMascot size={132} />
         </div>
         <h1 className="max-w-2xl text-4xl font-extrabold leading-tight sm:text-5xl">
-          Find your people.
+          Find <span className="marker">your people</span>.
           <br />
           Fix your corner of the world.
         </h1>
         <p className="max-w-xl text-lg text-clay">
-          Take Charli&apos;s two-minute welcome survey. Get matched with a
+          Take Charly&apos;s two-minute welcome survey. Get matched with a
           neighborhood crew, and let our AI agents coordinate the plan with local
           aid orgs — so you can just show up and help.
         </p>
@@ -35,7 +35,7 @@ export default async function Home() {
             href="/join"
             className="rounded-full bg-coral px-7 py-3 text-lg font-bold text-white shadow-md transition hover:bg-coral-deep hover:shadow-lg"
           >
-            Meet Charli 🧡
+            Meet Charly 🧡
           </Link>
           <Link
             href="/dashboard"
@@ -51,7 +51,7 @@ export default async function Home() {
         {[
           {
             step: "Survey",
-            text: "Charli's welcome survey — a few taps, plus one question an AI writes just for you.",
+            text: "Charly's welcome survey — a few taps, plus one question an AI writes just for you.",
             emoji: "📝",
           },
           {

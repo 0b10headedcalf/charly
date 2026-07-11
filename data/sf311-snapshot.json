@@ -1,0 +1,34 @@
+{
+  "fetchedAt": "2026-07-10T00:00:00Z",
+  "categories": [
+    { "service": "Street and Sidewalk Cleaning", "count": 25810, "groupId": "environment" },
+    { "service": "Graffiti Public", "count": 5585, "groupId": "environment" },
+    { "service": "Encampment", "count": 3267, "groupId": "housing" },
+    { "service": "Graffiti Private", "count": 2271, "groupId": "environment" },
+    { "service": "Blocked Street and Sidewalk", "count": 1722, "groupId": "housing" },
+    { "service": "Tree Maintenance", "count": 1408, "groupId": "environment" },
+    { "service": "Litter Receptacle Maintenance", "count": 861, "groupId": "environment" }
+  ],
+  "hotspots": [
+    {
+      "label": "Encampment reports",
+      "groupId": "housing",
+      "neighborhoods": [
+        { "name": "South of Market", "count": 588 },
+        { "name": "Mission", "count": 441 },
+        { "name": "Tenderloin", "count": 424 },
+        { "name": "Lower Nob Hill", "count": 155 }
+      ]
+    },
+    {
+      "label": "Street & sidewalk cleaning",
+      "groupId": "environment",
+      "neighborhoods": [
+        { "name": "Mission", "count": 3130 },
+        { "name": "South of Market", "count": 2480 },
+        { "name": "Tenderloin", "count": 2090 },
+        { "name": "Bayview Hunters Point", "count": 1370 }
+      ]
+    }
+  ]
+}

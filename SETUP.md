@@ -7,7 +7,7 @@ The app has tiers and works at every one — do them in order, stop when out of 
 | 0 | Demo mode: canned survey follow-up, template plans/copilot | nothing |
 | 1 ✅ | Live survey AI, live plans, live classifier, live copilot | 1 model access key (**already done**) |
 | 2 | Dedicated **Agent Platform agents** + **knowledge-base RAG** with citations | 3 agents + 1 KB |
-| 3 | GitHub OAuth sign-in (guest mode always works) | 1 GitHub OAuth app |
+| 3 | Google OAuth sign-in (guest mode always works) | 1 Google OAuth client |
 
 ## Tier 1 — model access key ✅ (done — key in `.env.local`)
 
@@ -21,7 +21,7 @@ Charly uses three separate agents, each with **its own endpoint and access key**
 
 | Agent | Job | Env vars |
 |---|---|---|
-| `charli` | member-facing persona | `CHARLI_ENDPOINT` / `CHARLI_KEY` |
+| `charly` | member-facing persona | `CHARLY_ENDPOINT` / `CHARLY_KEY` |
 | `planner` | organizing logistics → group action plans | `PLANNER_ENDPOINT` / `PLANNER_KEY` |
 | `scout` | org discovery/info + Org HQ copilot, **RAG** over the orgs KB | `SCOUT_ENDPOINT` / `SCOUT_KEY` |
 
@@ -42,19 +42,21 @@ add data source → upload `data/orgs.json` → wait for indexing.
 
 Console → **INFERENCE** → **Agent Platform**:
 1. **Knowledge base**: create `charly-orgs` → data source: file upload → `data/orgs.json` → wait for indexing.
-2. Create each agent from the table above. Instructions to paste: `CHARLI_SYSTEM_PROMPT`, `PLANNER_SYSTEM_PROMPT`, `ORG_COPILOT_SYSTEM_PROMPT` from `src/lib/prompts.ts` respectively. Attach the KB to `planner` and `scout` (Resources tab).
+2. Create each agent from the table above. Instructions to paste: `CHARLY_SYSTEM_PROMPT`, `PLANNER_SYSTEM_PROMPT`, `ORG_COPILOT_SYSTEM_PROMPT` from `src/lib/prompts.ts` respectively. Attach the KB to `planner` and `scout` (Resources tab).
 3. Per agent: Endpoint → make available + create access key → copy endpoint + key into `.env.local`.
 
 Restart the dev server after. The copilot and plan footers will switch from
 "serverless inference" to "agent + knowledge base" with RAG citations.
 
-## Tier 3 — GitHub OAuth
+## Tier 3 — Google OAuth
 
-1. [github.com/settings/developers](https://github.com/settings/developers) → New OAuth App:
-   - Homepage: `http://localhost:3000`
-   - Callback: `http://localhost:3000/api/auth/callback`
-2. Put `GITHUB_CLIENT_ID` / `GITHUB_CLIENT_SECRET` (+ random `AUTH_SECRET`) in `.env.local`, restart.
-3. The "Continue with GitHub" button appears on `/signin` automatically.
+1. [console.cloud.google.com](https://console.cloud.google.com) → APIs & Services →
+   **OAuth consent screen** (External, add yourself as test user) → **Credentials** →
+   Create Credentials → OAuth client ID → Web application:
+   - Authorized JavaScript origin: `http://localhost:3000`
+   - Authorized redirect URI: `http://localhost:3000/api/auth/callback`
+2. Put `GOOGLE_CLIENT_ID` / `GOOGLE_CLIENT_SECRET` (+ random `AUTH_SECRET`) in `.env.local`, restart.
+3. The "Continue with Google" button appears on `/signin` automatically.
    Guest sign-in (name only) always works, so the demo never blocks on this.
 
 ## Judging story cheat-sheet

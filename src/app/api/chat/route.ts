@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { randomUUID } from "crypto";
 import { resolveAgent } from "@/lib/do-ai";
 import { allGroups, classifyGroup, keywordMatch } from "@/lib/matching";
-import { CHARLI_SYSTEM_PROMPT } from "@/lib/prompts";
+import { CHARLY_SYSTEM_PROMPT } from "@/lib/prompts";
 import { addMember } from "@/lib/store";
 import type { ChatMessage, Member } from "@/lib/types";
 
@@ -29,7 +29,7 @@ export async function POST(req: Request) {
   const messages = (body.messages ?? []).slice(-20);
   const name = (body.name || "Neighbor").slice(0, 40);
 
-  const { mode, client, model } = resolveAgent("charli");
+  const { mode, client, model } = resolveAgent("charly");
   let reply: string;
   try {
     if (mode === "mock" || !client) {
@@ -37,7 +37,7 @@ export async function POST(req: Request) {
     } else {
       const withSystem =
         mode === "inference"
-          ? [{ role: "system" as const, content: CHARLI_SYSTEM_PROMPT }, ...messages]
+          ? [{ role: "system" as const, content: CHARLY_SYSTEM_PROMPT }, ...messages]
           : messages; // console agent already carries its instructions
       const res = await client.chat.completions.create({
         model,
@@ -48,9 +48,9 @@ export async function POST(req: Request) {
       reply = res.choices[0]?.message?.content ?? "Hmm, say that again?";
     }
   } catch (err) {
-    console.error("charli chat failed:", err);
+    console.error("charly chat failed:", err);
     return NextResponse.json(
-      { error: "Charli couldn't reach the DigitalOcean model. Check your keys in .env.local." },
+      { error: "Charly couldn't reach the DigitalOcean model. Check your keys in .env.local." },
       { status: 502 }
     );
   }
@@ -60,7 +60,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ reply: reply.trim(), mode });
   }
 
-  // Charli signalled a match: strip the protocol line, classify, save member.
+  // Charly signalled a match: strip the protocol line, classify, save member.
   const visible = reply.replace(MATCH_RE, "").trim();
   let interests: string[] = [];
   let summary = "";

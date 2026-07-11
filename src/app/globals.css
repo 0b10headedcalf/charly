@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 @theme {
-  --color-paper: #fff6e9;
-  --color-kraft: #f6e7c8;
+  --color-paper: #fff2df;
+  --color-kraft: #f6e3bd;
   --color-ink: #3b2a20;
   --color-clay: #8a6a54;
   --color-marigold: #ffaf2e;
@@ -30,6 +30,44 @@ body {
   background-size: 22px 22px;
 }
 
+::selection {
+  background: var(--color-marigold);
+  color: var(--color-ink);
+}
+
+/* warm sun halo behind the hero mascot */
+.sun-glow {
+  position: relative;
+}
+.sun-glow::before {
+  content: "";
+  position: absolute;
+  inset: -46%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 175, 46, 0.4) 0%,
+    rgba(255, 107, 87, 0.14) 45%,
+    transparent 70%
+  );
+  z-index: -1;
+}
+
+/* marker-pen highlight for a word or two of display text */
+.marker {
+  background: linear-gradient(
+    104deg,
+    transparent 2%,
+    rgba(255, 175, 46, 0.55) 8%,
+    rgba(255, 175, 46, 0.45) 92%,
+    transparent 98%
+  );
+  padding: 0 0.15em;
+  border-radius: 0.2em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
 h1, h2, h3, .font-display {
   font-family: var(--font-display);
 }
@@ -37,7 +75,7 @@ h1, h2, h3, .font-display {
 /* Bulletin-board flyer card: the signature element. */
 .flyer {
   position: relative;
-  background: #fffdf7;
+  background: #fffbf0;
   border: 1px solid rgba(59, 42, 32, 0.1);
   border-radius: 10px;
   box-shadow: var(--shadow-flyer);

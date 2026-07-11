@@ -3,6 +3,7 @@ import orgs from "../../../../data/orgs.json";
 import { resolveAgent } from "@/lib/do-ai";
 import { groupById } from "@/lib/matching";
 import { PLANNER_SYSTEM_PROMPT, plannerUserPrompt } from "@/lib/prompts";
+import { getCityPulse, pulseForGroup } from "@/lib/sfdata";
 import { readState, savePlan } from "@/lib/store";
 import type { ActionPlan, Org } from "@/lib/types";
 
@@ -44,6 +45,8 @@ export async function POST(req: Request) {
     )
     .join("\n");
 
+  const citySignals = pulseForGroup(await getCityPulse(), group.id);
+
   const { mode, client, model } = resolveAgent("planner");
   let markdown: string;
   const citations: string[] = [];
@@ -65,6 +68,7 @@ export async function POST(req: Request) {
               memberCount: members.length,
               interests,
               orgsBlock: "(use your knowledge base of partner organizations)",
+              citySignals,
             }),
           },
         ],
@@ -92,6 +96,7 @@ export async function POST(req: Request) {
               memberCount: members.length,
               interests,
               orgsBlock,
+              citySignals,
             }),
           },
         ],
