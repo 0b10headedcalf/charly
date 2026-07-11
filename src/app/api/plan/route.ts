@@ -1,6 +1,7 @@
-import { NextResponse } from "next/server";
+import { NextResponse, after } from "next/server";
 import orgs from "../../../../data/orgs.json";
 import { resolveAgent } from "@/lib/do-ai";
+import { getOrCreateHandout } from "@/lib/handout";
 import { groupById } from "@/lib/matching";
 import { PLANNER_SYSTEM_PROMPT, plannerUserPrompt } from "@/lib/prompts";
 import { getCityPulse, pulseForGroup } from "@/lib/sfdata";
@@ -125,5 +126,14 @@ export async function POST(req: Request) {
     generatedAt: new Date().toISOString(),
   };
   await savePlan(plan);
+  // Pre-warm the PDF handout after the response goes out, so "Export PDF
+  // handout" is a cache hit instead of an inline model call during page render.
+  after(async () => {
+    try {
+      await getOrCreateHandout(group, plan);
+    } catch (err) {
+      console.error("handout pre-warm failed (export will fall back):", err);
+    }
+  });
   return NextResponse.json({ plan, cached: false });
 }

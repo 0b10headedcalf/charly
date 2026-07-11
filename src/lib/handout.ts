@@ -55,6 +55,10 @@ async function aiDraft(group: Group, plan: ActionPlan): Promise<HandoutDraft | n
     ],
     max_completion_tokens: 900,
     temperature: 0.3,
+  }, {
+    // Tighter than the client default: this runs during handout page render,
+    // and the deterministic fallback is good enough to not keep a tab hanging.
+    timeout: 15_000,
   });
   const raw = res.choices[0]?.message?.content ?? "";
   const json = raw.match(/\{[\s\S]*\}/)?.[0];

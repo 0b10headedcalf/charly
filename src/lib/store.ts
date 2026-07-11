@@ -31,7 +31,12 @@ export async function readState(): Promise<AppState> {
 }
 
 export async function writeState(state: AppState): Promise<void> {
-  await fs.writeFile(STATE_PATH, JSON.stringify(state, null, 2), "utf8");
+  // Atomic write: a reader that lands mid-write would fail JSON.parse and
+  // readState's catch would reset the demo to seed data. rename() can't be
+  // observed half-done, so concurrent writers degrade to last-write-wins.
+  const tmp = `${STATE_PATH}.${process.pid}.${Date.now()}.tmp`;
+  await fs.writeFile(tmp, JSON.stringify(state, null, 2), "utf8");
+  await fs.rename(tmp, STATE_PATH);
 }
 
 export async function addMember(member: Member): Promise<void> {

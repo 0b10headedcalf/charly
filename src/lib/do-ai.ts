@@ -8,17 +8,31 @@ export const FALLBACK_CHAT_MODEL = process.env.DO_CHAT_MODEL || "anthropic-claud
 
 export type AiMode = "agent" | "inference" | "mock";
 
+// Fail fast: every caller has a deterministic fallback, so a hung DO request
+// should surface within one page-load's patience, not the SDK's 10-min default.
+const CLIENT_TIMEOUT_MS = 30_000;
+
 function agentClient(endpoint: string, key: string): OpenAI {
   // Console-created DO agents expose {endpoint}/api/v1/chat/completions,
   // authed with the agent's own access key. model is ignored ("n/a").
   const base = endpoint.replace(/\/+$/, "");
-  return new OpenAI({ baseURL: `${base}/api/v1/`, apiKey: key });
+  return new OpenAI({
+    baseURL: `${base}/api/v1/`,
+    apiKey: key,
+    timeout: CLIENT_TIMEOUT_MS,
+    maxRetries: 0,
+  });
 }
 
 export function inferenceClient(): OpenAI | null {
   const key = process.env.DIGITAL_OCEAN_MODEL_ACCESS_KEY;
   if (!key) return null;
-  return new OpenAI({ baseURL: INFERENCE_BASE_URL, apiKey: key });
+  return new OpenAI({
+    baseURL: INFERENCE_BASE_URL,
+    apiKey: key,
+    timeout: CLIENT_TIMEOUT_MS,
+    maxRetries: 0,
+  });
 }
 
 // Each role maps to its own DO Agent Platform agent (own endpoint + key):
