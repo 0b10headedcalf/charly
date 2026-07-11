@@ -1,0 +1,202 @@
+[
+  {
+    "id": "mission-community-fridge",
+    "name": "Mission Community Fridge Network",
+    "groupIds": ["food-security"],
+    "neighborhood": "Mission District",
+    "mission": "Keeps six 24/7 community fridges stocked with free fresh food for anyone who needs it.",
+    "needs": ["fridge restocking shifts (Tue/Thu)", "grocery pickup drivers", "fridge cleaning volunteers"],
+    "capacity": 25,
+    "contact": "hello@missionfridge.example.org"
+  },
+  {
+    "id": "golden-gate-food-bank",
+    "name": "Golden Gate Neighborhood Food Bank",
+    "groupIds": ["food-security"],
+    "neighborhood": "Richmond District",
+    "mission": "Distributes weekly grocery boxes to 400+ families and runs a Saturday farmers-market rescue program.",
+    "needs": ["box packing (Fri evenings)", "Saturday market gleaning crew", "Cantonese/Spanish translators"],
+    "capacity": 40,
+    "contact": "volunteer@ggfoodbank.example.org"
+  },
+  {
+    "id": "sunset-supper-club",
+    "name": "Sunset Supper Club",
+    "groupIds": ["food-security", "elders"],
+    "neighborhood": "Outer Sunset",
+    "mission": "Cooks and delivers hot meals to homebound seniors three nights a week.",
+    "needs": ["home cooks", "delivery cyclists", "meal companions who stay to chat"],
+    "capacity": 18,
+    "contact": "team@sunsetsupper.example.org"
+  },
+  {
+    "id": "bayview-harvest",
+    "name": "Bayview Urban Harvest",
+    "groupIds": ["food-security", "environment"],
+    "neighborhood": "Bayview-Hunters Point",
+    "mission": "Grows produce on three reclaimed lots and gives every pound away at a weekly free farm stand.",
+    "needs": ["garden work days (Sat mornings)", "farm stand hosts", "compost haulers"],
+    "capacity": 30,
+    "contact": "grow@bayviewharvest.example.org"
+  },
+  {
+    "id": "haven-house-sf",
+    "name": "Haven House SF",
+    "groupIds": ["housing"],
+    "neighborhood": "Tenderloin",
+    "mission": "Runs a 60-bed shelter with job counseling and a mail service for unhoused neighbors.",
+    "needs": ["dinner service shifts", "intake desk volunteers", "hygiene kit assembly"],
+    "capacity": 35,
+    "contact": "help@havenhousesf.example.org"
+  },
+  {
+    "id": "tenant-power-clinic",
+    "name": "Tenant Power Legal Clinic",
+    "groupIds": ["housing"],
+    "neighborhood": "Mission District",
+    "mission": "Free walk-in clinic helping renters fight evictions and understand their rights.",
+    "needs": ["intake interviewers", "document translators", "know-your-rights flyer distribution"],
+    "capacity": 15,
+    "contact": "clinic@tenantpower.example.org"
+  },
+  {
+    "id": "street-outreach-collective",
+    "name": "SoMa Street Outreach Collective",
+    "groupIds": ["housing", "food-security"],
+    "neighborhood": "SoMa",
+    "mission": "Walks nightly routes bringing water, socks, first aid, and referrals to neighbors sleeping outside.",
+    "needs": ["outreach walkers (pairs, evenings)", "supply kit packers", "van drivers"],
+    "capacity": 20,
+    "contact": "walk@somaoutreach.example.org"
+  },
+  {
+    "id": "welcome-home-project",
+    "name": "The Welcome Home Project",
+    "groupIds": ["housing"],
+    "neighborhood": "Citywide",
+    "mission": "Furnishes empty apartments for families exiting shelters, using donated furniture and volunteer movers.",
+    "needs": ["weekend moving crews", "furniture pickup drivers", "apartment setup stylists"],
+    "capacity": 24,
+    "contact": "movers@welcomehome.example.org"
+  },
+  {
+    "id": "ocean-beach-brigade",
+    "name": "Ocean Beach Cleanup Brigade",
+    "groupIds": ["environment"],
+    "neighborhood": "Ocean Beach",
+    "mission": "Hosts twice-monthly beach cleanups and tracks debris data for city advocacy.",
+    "needs": ["cleanup captains", "data loggers", "gear station hosts"],
+    "capacity": 60,
+    "contact": "tides@obbrigade.example.org"
+  },
+  {
+    "id": "friends-of-the-panhandle",
+    "name": "Friends of the Panhandle",
+    "groupIds": ["environment"],
+    "neighborhood": "Panhandle / NOPA",
+    "mission": "Plants and cares for street trees and native gardens along the Panhandle corridor.",
+    "needs": ["tree watering routes", "planting day volunteers", "mulch spreading crews"],
+    "capacity": 28,
+    "contact": "roots@panhandlefriends.example.org"
+  },
+  {
+    "id": "alemany-community-garden",
+    "name": "Alemany Community Garden Alliance",
+    "groupIds": ["environment", "food-security"],
+    "neighborhood": "Bernal Heights",
+    "mission": "Maintains 80 garden plots and teaches free composting and growing workshops.",
+    "needs": ["workshop assistants", "tool library keepers", "accessible-bed builders"],
+    "capacity": 22,
+    "contact": "sprout@alemanygarden.example.org"
+  },
+  {
+    "id": "826-story-lab",
+    "name": "826 Story Lab",
+    "groupIds": ["education"],
+    "neighborhood": "Mission District",
+    "mission": "Free drop-in writing and homework help for students aged 8-18, plus publishing projects.",
+    "needs": ["after-school tutors (3-6pm)", "field trip chaperones", "zine printing helpers"],
+    "capacity": 45,
+    "contact": "write@826storylab.example.org"
+  },
+  {
+    "id": "code-bridge-sf",
+    "name": "CodeBridge SF",
+    "groupIds": ["education"],
+    "neighborhood": "Bayview-Hunters Point",
+    "mission": "Weekend coding classes and laptop lending for high schoolers from under-resourced schools.",
+    "needs": ["Saturday coding mentors", "laptop refurbishers", "demo day judges"],
+    "capacity": 20,
+    "contact": "mentor@codebridgesf.example.org"
+  },
+  {
+    "id": "reading-partners-richmond",
+    "name": "Reading Partners Richmond",
+    "groupIds": ["education"],
+    "neighborhood": "Richmond District",
+    "mission": "One-on-one reading tutoring for K-4 students reading below grade level.",
+    "needs": ["weekly reading tutors (45 min)", "book drive organizers", "classroom decorators"],
+    "capacity": 50,
+    "contact": "read@rpreadingrichmond.example.org"
+  },
+  {
+    "id": "little-brothers-sf",
+    "name": "Little Brothers - Friends of the Elderly SF",
+    "groupIds": ["elders"],
+    "neighborhood": "Citywide",
+    "mission": "Matches volunteers with isolated seniors for monthly visits, calls, and holiday celebrations.",
+    "needs": ["visiting volunteers", "birthday call squad", "holiday event hosts"],
+    "capacity": 55,
+    "contact": "visit@littlebrotherssf.example.org"
+  },
+  {
+    "id": "tech-tea-time",
+    "name": "Tech & Tea Time",
+    "groupIds": ["elders", "education"],
+    "neighborhood": "Chinatown",
+    "mission": "Drop-in sessions where volunteers help seniors with phones, scam avoidance, and video calls to family.",
+    "needs": ["patient tech helpers", "Cantonese/Mandarin speakers", "session greeters"],
+    "capacity": 16,
+    "contact": "teatime@techtea.example.org"
+  },
+  {
+    "id": "meals-with-elders",
+    "name": "Meals with Elders",
+    "groupIds": ["elders", "food-security"],
+    "neighborhood": "Excelsior",
+    "mission": "Pairs volunteers with seniors for weekly shared lunches - half meal delivery, half friendship.",
+    "needs": ["lunch companions", "route coordinators", "birthday dessert bakers"],
+    "capacity": 26,
+    "contact": "lunch@mealswithelders.example.org"
+  },
+  {
+    "id": "sf-animal-care-friends",
+    "name": "SF Animal Care Friends",
+    "groupIds": ["animals"],
+    "neighborhood": "Mission District",
+    "mission": "Support crew for the city shelter: dog walking, cat socializing, and adoption event staffing.",
+    "needs": ["weekday dog walkers", "cat cuddle shifts", "adoption day photographers"],
+    "capacity": 48,
+    "contact": "paws@sfanimalfriends.example.org"
+  },
+  {
+    "id": "foster-tails-network",
+    "name": "Foster Tails Network",
+    "groupIds": ["animals"],
+    "neighborhood": "Citywide",
+    "mission": "Recruits and supports foster homes for kittens, seniors dogs, and pets of hospitalized owners.",
+    "needs": ["short-term foster homes", "supply drop drivers", "foster mentor buddies"],
+    "capacity": 32,
+    "contact": "foster@fostertails.example.org"
+  },
+  {
+    "id": "pets-of-the-park",
+    "name": "Pets of the Park Pantry",
+    "groupIds": ["animals", "housing"],
+    "neighborhood": "Golden Gate Park",
+    "mission": "Free pet food, leashes, and vet-day events for pets of unhoused and low-income neighbors.",
+    "needs": ["pantry table hosts", "pet food drive leads", "vet day check-in crew"],
+    "capacity": 14,
+    "contact": "pantry@petsofthepark.example.org"
+  }
+]

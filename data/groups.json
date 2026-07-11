@@ -1,0 +1,56 @@
+[
+  {
+    "id": "food-security",
+    "name": "Food Security Crew",
+    "emoji": "🥕",
+    "tagline": "No neighbor goes hungry",
+    "description": "Food banks, community fridges, meal deliveries, and grocery runs for neighbors who need them.",
+    "color": "#E8960C",
+    "keywords": ["food", "hunger", "meals", "groceries", "cooking", "fridge", "pantry", "nutrition", "farmers"]
+  },
+  {
+    "id": "housing",
+    "name": "Housing & Shelter Squad",
+    "emoji": "🏠",
+    "tagline": "Everyone deserves a safe place",
+    "description": "Shelter support, tenant advocacy, supply drives, and outreach for unhoused neighbors.",
+    "color": "#E5543F",
+    "keywords": ["housing", "homeless", "shelter", "rent", "tenant", "eviction", "unhoused", "outreach"]
+  },
+  {
+    "id": "environment",
+    "name": "Green Streets Team",
+    "emoji": "🌱",
+    "tagline": "Keep our blocks green and clean",
+    "description": "Park cleanups, tree planting, community gardens, and neighborhood beautification.",
+    "color": "#2E9E6B",
+    "keywords": ["environment", "cleanup", "trees", "garden", "climate", "recycling", "park", "beach", "nature"]
+  },
+  {
+    "id": "education",
+    "name": "Education & Youth Circle",
+    "emoji": "📚",
+    "tagline": "Every kid gets a fair shot",
+    "description": "Tutoring, mentorship, after-school programs, and school supply drives.",
+    "color": "#4C86E8",
+    "keywords": ["education", "tutoring", "kids", "youth", "school", "mentor", "reading", "stem", "teaching"]
+  },
+  {
+    "id": "elders",
+    "name": "Elder Care Collective",
+    "emoji": "🌷",
+    "tagline": "Nobody ages alone",
+    "description": "Friendly visits, tech help, meal companionship, and errands for older neighbors.",
+    "color": "#8C5DC4",
+    "keywords": ["elders", "seniors", "elderly", "companionship", "visits", "loneliness", "retirement", "aging"]
+  },
+  {
+    "id": "animals",
+    "name": "Animal Allies",
+    "emoji": "🐾",
+    "tagline": "Paws deserve people too",
+    "description": "Shelter volunteering, foster networks, adoption events, and pet food drives.",
+    "color": "#D9589B",
+    "keywords": ["animals", "pets", "dogs", "cats", "shelter", "foster", "adoption", "wildlife", "rescue"]
+  }
+]

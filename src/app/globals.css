@@ -1,0 +1,99 @@
+@import "tailwindcss";
+
+@theme {
+  --color-paper: #fff6e9;
+  --color-kraft: #f6e7c8;
+  --color-ink: #3b2a20;
+  --color-clay: #8a6a54;
+  --color-marigold: #ffaf2e;
+  --color-marigold-deep: #e8960c;
+  --color-coral: #ff6b57;
+  --color-coral-deep: #e5543f;
+  --color-leaf: #2e9e6b;
+  --color-sky: #4c86e8;
+  --color-plum: #8c5dc4;
+  --color-rose: #d9589b;
+
+  --font-display: var(--font-bricolage), system-ui, sans-serif;
+  --font-body: var(--font-nunito), system-ui, sans-serif;
+
+  --shadow-flyer: 0 1px 2px rgba(59, 42, 32, 0.12), 0 6px 16px -6px rgba(59, 42, 32, 0.18);
+  --shadow-flyer-lift: 0 2px 4px rgba(59, 42, 32, 0.12), 0 14px 28px -8px rgba(59, 42, 32, 0.24);
+}
+
+body {
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  /* subtle paper grain */
+  background-image: radial-gradient(rgba(138, 106, 84, 0.05) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+h1, h2, h3, .font-display {
+  font-family: var(--font-display);
+}
+
+/* Bulletin-board flyer card: the signature element. */
+.flyer {
+  position: relative;
+  background: #fffdf7;
+  border: 1px solid rgba(59, 42, 32, 0.1);
+  border-radius: 10px;
+  box-shadow: var(--shadow-flyer);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+.flyer::before {
+  /* pushpin */
+  content: "";
+  position: absolute;
+  top: -7px;
+  left: 50%;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #ffd27a, var(--pin-color, #e5543f) 65%);
+  box-shadow: 0 2px 3px rgba(59, 42, 32, 0.35);
+  transform: translateX(-50%);
+}
+.flyer.tilt-l { transform: rotate(-1.4deg); }
+.flyer.tilt-r { transform: rotate(1.2deg); }
+.flyer:hover {
+  transform: rotate(0deg) translateY(-3px);
+  box-shadow: var(--shadow-flyer-lift);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flyer, .flyer:hover { transition: none; transform: none; }
+  .bounce-soft { animation: none !important; }
+}
+
+@keyframes bounce-soft {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+.bounce-soft {
+  animation: bounce-soft 3.2s ease-in-out infinite;
+}
+
+/* Markdown plan rendering */
+.plan-md h2 {
+  font-size: 1.15rem;
+  margin: 1.1rem 0 0.4rem;
+  color: var(--color-coral-deep);
+}
+.plan-md ul { list-style: none; padding-left: 0; margin: 0.25rem 0; }
+.plan-md li {
+  padding-left: 1.4rem;
+  position: relative;
+  margin: 0.35rem 0;
+  line-height: 1.5;
+}
+.plan-md li::before {
+  content: "✶";
+  position: absolute;
+  left: 0.2rem;
+  color: var(--color-marigold-deep);
+}
+.plan-md p { margin: 0.4rem 0; line-height: 1.55; }
+.plan-md strong { color: var(--color-ink); }
